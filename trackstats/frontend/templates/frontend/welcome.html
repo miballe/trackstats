@@ -1,0 +1,81 @@
+<html>
+<head>
+
+  <meta name="viewport" content="width-device-width, initial-scale=1"> 	
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/styles/wlcmStyle.css">
+  <link rel="stylesheet" href="/styles/bootstrap.css">
+  <link rel="stylesheet" href="/styles/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/bootstrap-theme.css">
+</head>
+<body >
+	<div class="wlcmNav">
+		
+		<div class="signUp"><a href ="javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><i class="fa fa-user-plus fa-2x"></i></a></div>
+		<div class="login"><a href ="javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><i class="fa fa-sign-in fa-2x"></i></a></div>
+		<div class="mask2"><i class="fa fa-tasks fa-3x"></i></div>
+	</div>
+	
+	<div id="light" class="white_content">
+		 <a href="javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
+          <span class="glyphicon glyphicon-remove" style="float:right;"></span>
+        </a>
+			<form>
+					<div class="form-group">
+							<label for="exampleInputEmail1">Email address</label>
+							<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+					</div>
+					<div class="form-group">
+							<label for="exampleInputPassword1">Password</label>
+							<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+					</div>
+					
+						<button type="submit" class="btn btn-default">Submit</button>
+			</form>
+		</div>
+		<div id="fade" class="black_overlay"></div>
+	
+	
+	<div class="cycle-slideshow">
+		<img class="img-responsive" src="/images/welcomepic4.jpg">
+		<img class="img-responsive" src="/images/welcomepic2.jpg">
+		<img class="img-responsive" src="/images/welcomepic1.jpg">
+	</div>
+	
+	<section class="section-spacing text-center">
+	
+	<div class="container">
+
+    <header class="section-header">
+      <h2>Main Benefits Of The Product</h2>
+      <h3>Reasons why you should choose this product</h3>
+    </header>
+    
+	<div class="row">
+      <div class="col-sm-4"> <img src="/images/benefits-1.png" alt="benefits of product">
+        <h4>Lorem Lpsum</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      </div>
+      <div class="col-sm-4"> <img src="/images/benefits-2.png" alt="benefits of product">
+        <h4>Lorem Lpsum</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      </div>
+      <div class="col-sm-4"> <img src="/images/benefits-3.png" alt="benefits of product">
+        <h4>Lorem Lpsum</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      </div>
+    </div>
+  
+  </div>
+
+ </section>
+
+
+</body>
+<script src="/scripts/jquery-2.1.1.js"></script>
+<script src="/scripts/wlcm.js"></script>
+<script src="/scripts/jquery.cycle2.min.js"></script>
+
+</html>
+
+

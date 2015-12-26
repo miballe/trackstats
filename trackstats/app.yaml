@@ -1,0 +1,29 @@
+application: trackstatsk
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+
+- url: /images
+  static_dir: static/images
+  
+- url: /styles
+  static_dir: static/styles
+  
+- url: /scripts
+  static_dir: static/scripts
+  
+builtins:
+- django_wsgi: on
+  
+libraries:
+- name: django
+  version: "1.5"
+
+env_variables:
+  DJANGO_SETTINGS_MODULE: 'trackstats.settings'

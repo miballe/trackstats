@@ -1,0 +1,109 @@
+.textleft {
+    margin-top: 50px;
+	color:black;
+    
+
+}
+
+.text {
+    margin-top: 90px;
+    
+}
+
+.text1 {
+	margin-left: 50px;
+}
+
+.action1 {
+	margin-top: 60px;
+	float: left;
+	
+	
+}
+
+.botmarg {
+	margin-bottom:50px;
+}
+
+.film {
+	height: 210px;
+	}
+
+body {
+	width: 1280px;
+  height: 720px;
+	background-color: #F5F5F5;
+}
+
+.carousel {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.text-center {
+	color:black;
+	margin-bottom: 80px;
+	
+}
+
+.text-justify {
+		color:white;
+	
+}
+
+.filmpic {
+	margin-top:60px;
+}
+
+.filmdesc {
+	margin-top: 40px;
+	color:white;
+}
+
+
+.margin_top_t{
+	margin-top: 90px;
+}
+
+.intro {
+	color:black;
+	text-align: center;
+}
+
+.runtime {
+	font-size: small;
+	
+}
+
+#a_form{
+	margin-bottom: 90px;
+}
+
+.text-review {
+	color:white;
+	
+}
+
+#name, #rating, #comment {
+	color:white;
+	
+}
+
+.radiotext {
+	color:white;
+}
+
+.table {
+    width:10%;
+    font-size:30;
+    background-color: white;
+}
+
+.listleft {
+    float:left;
+    position:relative;
+    height:250px;
+    width:200px;
+    margin-top: -330px;
+    font-size:20px;
+ }
