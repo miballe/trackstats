@@ -1,1 +1,0 @@
-Folder for JPG, PNG and GIF images (among other extensions)
