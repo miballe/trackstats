@@ -1,14 +1,9 @@
-# from django.shortcuts import render
-# from django.http import HttpResponse
+from django.shortcuts import render
+from django.http import HttpResponse
 import datetime
 import json
 import os
 import ssl
-
-# import httplib2
-# import urllib2
-# from googleapiclient.discovery import build
-# from oauth2client.client import OAuth2WebServerFlow
 
 import requests
 from pprint import pprint
@@ -30,30 +25,31 @@ ACT_READ = "https://www.googleapis.com/auth/fitness.activity.read"
 LOC_READ = "https://www.googleapis.com/auth/fitness.location.read"
 BODY_READ = "https://www.googleapis.com/auth/fitness.body.read"
 
-
-START_TIME = "2011-04-01T00:00:00.00Z" 
+#Example
+# https://www.googleapis.com/fitness/v1/users/me/sessions?startTime=2014-04-01T00:00:00.00Z&endTime=2014-04-30T23:59:59.99Z
 # Get current date
 # END_TIME = "2016-04-01T00:00:00.00Z"
 # Check if needed to add milliseconds
+START_TIME = "2011-04-01T00:00:00.00Z" 
 END_TIME = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.00Z')
 # print END_TIME
-
-# https://www.googleapis.com/fitness/v1/users/me/sessions?startTime=2014-04-01T00:00:00.00Z&endTime=2014-04-30T23:59:59.99Z
-# RESOURCE_PATH = "/users/me/sessions?"
-OAUTH_TOKEN = "ya29.WAIemwWd0-XA0m2a1HEe-xmkXwbuJQKviOFwngh60D80sJZ7U8HQ0t1g16pWL7OcY4DI"
+OAUTH_TOKEN = "ya29.WAK5eF0Ot6ogmvZXdJFygOzIHJuUJqz_g8WG9DbcpqZldC-b66wb909XiK6D6z3dkrDO"
 
 
-get_sessions_url = "https://www.googleapis.com/fitness/v1/users/me/sessions?startTime=" + START_TIME + "&endTime=" + END_TIME + "&access_token=" + OAUTH_TOKEN
+def test_sessions(request):
+	get_sessions_url = "https://www.googleapis.com/fitness/v1/users/me/sessions?startTime=" + START_TIME + "&endTime=" + END_TIME + "&access_token=" + OAUTH_TOKEN
+	r = requests.get(get_sessions_url)
+	# print(r.status_code)
+	# print(get_sessions_url)
+	data = r.json()
+	# pprint (data)
+	# data = json.loads(r)
+	return HttpResponse(str(data))
 
-r = requests.get(get_sessions_url)
-print(r.status_code)
-print(get_sessions_url)
-
-
-data = r.json()
-pprint (data)
-# data = json.loads(r)
-# print(data)
+def select_session(request):
+	# select_session_url = ""
+	# r1 = requests.get()
+	return HttpResponse("Expected to return a particular session")
 
 
 def sessions(request):
