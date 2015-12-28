@@ -8,8 +8,7 @@ import os
 # import urllib2
 # from googleapiclient.discovery import build
 # from oauth2client.client import OAuth2WebServerFlow
-import requests
-
+# import requests
 from pprint import pprint
 
 
@@ -43,12 +42,12 @@ OAUTH_TOKEN = "ya29.WAIGNOCSCTkj0vy3DJxCpOwsuek2KK8ujbz1ENrYyKWrEuMv-bCAJrb35Apd
 
 get_sessions_url = "https://www.googleapis.com/fitness/v1/users/me/sessions?startTime=" + START_TIME + "&endTime=" + END_TIME + "&access_token=" + OAUTH_TOKEN
 
-r = requests.get(get_sessions_url)
-print(r.status_code)
-print(get_sessions_url)
+#r = requests.get(get_sessions_url)
+#print(r.status_code)
+#print(get_sessions_url)
 
-data = r.json()
-print data
+#data = r.json()
+#print data
 # data = json.loads(r)
 # print(data)
 

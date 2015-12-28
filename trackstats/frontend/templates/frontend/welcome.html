@@ -1,20 +1,36 @@
-<html>
+<html itemscope itemtype="http://schema.org/Article">
 <head>
-
     <meta name="viewport" content="width-device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/styles/wlcmStyle.css">
     <link rel="stylesheet" href="/styles/bootstrap.css">
     <link rel="stylesheet" href="/styles/bootstrap.min.css">
     <link rel="stylesheet" href="/styles/bootstrap-theme.css">
-    <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="1047651366452-32ph4ndul3s5caub46t3nbue3p5e5uha.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-
-
+	<!-- BEGIN Google Sign-In Pre-requisites -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+	<!-- END Google Sign-In Pre-requisites -->
+	<script>
+	function start() {
+	  gapi.load('auth2', function() {
+		auth2 = gapi.auth2.init({
+		  client_id: '1047651366452-32ph4ndul3s5caub46t3nbue3p5e5uha.apps.googleusercontent.com',
+		  // Scopes to request in addition to 'profile' and 'email'
+		  scope: 'https://www.googleapis.com/auth/fitness.activity.read https://www.googleapis.com/auth/fitness.body.read https://www.googleapis.com/auth/fitness.location.read'
+		});
+	  });
+	}
+	</script>
 </head>
 <body>
-<div class="g-signin2 wlcmNav" data-onsuccess="onSignIn" data-theme="dark"></div>
+<button id="signinButton">Sign in with Google</button>
+<script>
+  $('#signinButton').click(function() {
+    // signInCallback defined in step 6.
+    auth2.grantOfflineAccess({'redirect_uri': 'http://localhost:8080/usr/loginac/'}).then(signInCallback);
+  });
+</script>
+<div id="result"></div>
 <!--<div class="wlcmNav">
 
     <div class="signUp"><a href="javascript:void(0)"
