@@ -1,0 +1,25 @@
+
+  [
+    {
+        "key": "Bike",
+        "value": "2"
+    },
+    {
+        "key": "Running",
+        "value": "15"
+    },
+    {
+        "key": "Swimming",
+        "value": "5"
+    },
+   
+    {
+        "key": "Walking",
+        "value": "9"
+    }
+    ,
+    {
+        "key": "Walking+Running",
+        "value": "22"
+    }
+  ]
