@@ -17,7 +17,7 @@ handlers:
   
 - url: /scripts
   static_dir: static/scripts
-  
+
 builtins:
 - django_wsgi: on
   
