@@ -30,20 +30,20 @@ BODY_READ = "https://www.googleapis.com/auth/fitness.body.read"
 # Get current date
 # END_TIME = "2016-04-01T00:00:00.00Z"
 # Check if needed to add milliseconds
-START_TIME = "2011-04-01T00:00:00.00Z" 
-END_TIME = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.00Z')
+startTime = "2011-04-01T00:00:00.00Z" 
+endTime = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.00Z')
 # print END_TIME
-OAUTH_TOKEN = "ya29.WAK5eF0Ot6ogmvZXdJFygOzIHJuUJqz_g8WG9DbcpqZldC-b66wb909XiK6D6z3dkrDO"
+oauthToken = "ya29.WAKqHmPicG8TLcFtxVUAEudPcIfOAwzxIbEr3USlziV-qhXL5c-8u9ZDotRNjmnYdK37"
 
 
 def test_sessions(request):
-	get_sessions_url = "https://www.googleapis.com/fitness/v1/users/me/sessions?startTime=" + START_TIME + "&endTime=" + END_TIME + "&access_token=" + OAUTH_TOKEN
-	r = requests.get(get_sessions_url)
+	params = {'startTime':startTime , 'endTime': endTime , 'access_token' : oauthToken  }
+
+	get_sessions_url = "https://www.googleapis.com/fitness/v1/users/me/sessions"
+	r = requests.get(get_sessions_url, params = params )
 	# print(r.status_code)
-	# print(get_sessions_url)
 	data = r.json()
-	# pprint (data)
-	# data = json.loads(r)
+	#data = json.loads(r)
 	return HttpResponse(str(data))
 
 def select_session(request):

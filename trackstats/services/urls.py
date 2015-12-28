@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^sessiondetails/$', views.sessiondetails, name='sessiondetails'),
     url(r'^test_sessions/$', views.test_sessions, name='test_sessions'),
     url(r'^select_session/$', views.select_session, name='select_session')
+
 ]
