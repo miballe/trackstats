@@ -1,8 +1,9 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+# from django.shortcuts import render
+# from django.http import HttpResponse
 import datetime
 import json
 import os
+import ssl
 
 # import httplib2
 # import urllib2
@@ -39,7 +40,8 @@ END_TIME = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.00Z')
 
 # https://www.googleapis.com/fitness/v1/users/me/sessions?startTime=2014-04-01T00:00:00.00Z&endTime=2014-04-30T23:59:59.99Z
 # RESOURCE_PATH = "/users/me/sessions?"
-OAUTH_TOKEN = "ya29.WAKKRxthoXK-b0FTPP_W4rS_y6rhxHFavuhECwoIJVRdKZVMEmAJ97oT4k5beS5vJV8L"
+OAUTH_TOKEN = "ya29.WAIemwWd0-XA0m2a1HEe-xmkXwbuJQKviOFwngh60D80sJZ7U8HQ0t1g16pWL7OcY4DI"
+
 
 get_sessions_url = "https://www.googleapis.com/fitness/v1/users/me/sessions?startTime=" + START_TIME + "&endTime=" + END_TIME + "&access_token=" + OAUTH_TOKEN
 
@@ -50,10 +52,8 @@ print(get_sessions_url)
 
 data = r.json()
 pprint (data)
-
 # data = json.loads(r)
 # print(data)
-
 
 
 def sessions(request):
