@@ -2,33 +2,24 @@
 <head>
     <meta name="viewport" content="width-device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/styles/wlcmStyle.css">
-    <link rel="stylesheet" href="/static/styles/bootstrap.css">
-    <link rel="stylesheet" href="/static/styles/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/styles/bootstrap-theme.css">
+    <link rel="stylesheet" href="styles/wlcmStyle.css">
+    <link rel="stylesheet" href="styles/bootstrap.css">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/bootstrap-theme.css">
 	<!-- BEGIN Google Sign-In Pre-requisites -->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-	<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+	<meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="1047651366452-32ph4ndul3s5caub46t3nbue3p5e5uha.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 	<!-- END Google Sign-In Pre-requisites -->
-	<script>
-	function start() {
-	  gapi.load('auth2', function() {
-		auth2 = gapi.auth2.init({
-		  client_id: '1047651366452-32ph4ndul3s5caub46t3nbue3p5e5uha.apps.googleusercontent.com',
-		  // Scopes to request in addition to 'profile' and 'email'
-		  scope: 'https://www.googleapis.com/auth/fitness.activity.read https://www.googleapis.com/auth/fitness.body.read https://www.googleapis.com/auth/fitness.location.read'
-		});
-	  });
-	}
-	</script>
 </head>
 <body>
-<button id="signinButton">Sign in with Google</button>
+<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 <script>
-  $('#signinButton').click(function() {
-    // signInCallback defined in step 6.
-    auth2.grantOfflineAccess({'redirect_uri': 'http://localhost:8080/usr/loginac/'}).then(signInCallback);
-  });
+    function onSignIn(googleUser) {
+
+        window.location = 'http://localhost:8080/usr/login';
+
+}
 </script>
 <div id="result"></div>
 <!--<div class="wlcmNav">
@@ -64,9 +55,9 @@
 
 
 <div class="cycle-slideshow">
-    <img class="img-responsive" src="../../../static/images/welcomepic4.jpg">
-    <img class="img-responsive" src="../../../static/images/welcomepic2.jpg">
-    <img class="img-responsive" src="../../../static/images/welcomepic1.jpg">
+    <img class="img-responsive" src="/images/welcomepic4.jpg">
+    <img class="img-responsive" src="/images/welcomepic2.jpg">
+    <img class="img-responsive" src="/images/welcomepic1.jpg">
 </div>
 
 <section class="section-spacing text-center">
@@ -79,17 +70,17 @@
         </header>
 
         <div class="row">
-            <div class="col-sm-4"><img src="../../../static/images/benefits-1.png" alt="benefits of product">
+            <div class="col-sm-4"><img src="images/benefits-1.png" alt="benefits of product">
                 <h4>Lorem Lpsum</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
                     et dolore.</p>
             </div>
-            <div class="col-sm-4"><img src="../../../static/images/benefits-2.png" alt="benefits of product">
+            <div class="col-sm-4"><img src="images/benefits-2.png" alt="benefits of product">
                 <h4>Lorem Lpsum</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
                     et dolore.</p>
             </div>
-            <div class="col-sm-4"><img src="../../../static/images/benefits-3.png" alt="benefits of product">
+            <div class="col-sm-4"><img src="images/benefits-3.png" alt="benefits of product">
                 <h4>Lorem Lpsum</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
                     et dolore.</p>
@@ -102,9 +93,9 @@
 
 
 </body>
-<script src="../../../static/scripts/jquery-2.1.1.js"></script>
-<script src="../../../static/scripts/wlcm.js"></script>
-<script src="../../../static/scripts/jquery.cycle2.min.js"></script>
+<script src="scripts/jquery-2.1.1.js"></script>
+<script src="scripts/wlcm.js"></script>
+<script src="scripts/jquery.cycle2.min.js"></script>
 
 </html>
 
