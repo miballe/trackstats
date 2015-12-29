@@ -13,25 +13,19 @@
 	<!-- END Google Sign-In Pre-requisites -->
 </head>
 <body>
-<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-<script>
-    function onSignIn(googleUser) {
 
-        window.location = 'http://localhost:8080/usr/login';
+<div class="wlcmNav">
 
-}
-</script>
-<div id="result"></div>
-<!--<div class="wlcmNav">
+    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+    <script>
+        function onSignIn(googleUser) {
 
-    <div class="signUp"><a href="javascript:void(0)"
-                           onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><i
-            class="fa fa-user-plus fa-2x"></i></a></div>
-    <div class="login"><a href="javascript:void(0)"
-                          onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><i
-            class="fa fa-sign-in fa-2x"></i></a></div>
-    <div class="mask2"><i class="fa fa-tasks fa-3x"></i></div>
-</div>-->
+            window.location = 'http://localhost:8080/usr/login';
+
+        }
+    </script>
+    <div id="result"></div>
+</div>
 
 <div id="light" class="white_content">
     <a href="javascript:void(0)"

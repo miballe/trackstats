@@ -3,11 +3,14 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.http import QueryDict
 from django.views.decorators.csrf import csrf_exempt
+from django.core.signing import Signer
+from django.core import signing
 from httplib2 import Http
 import urllib
 import json
 import os
 import logging
+
 
 credentials_dir = os.path.join(os.path.dirname(__file__), '../ClientIDSecret.json')
 ACT_READ = "https://www.googleapis.com/auth/fitness.activity.read"
@@ -58,21 +61,15 @@ def auth(request):
 
         resp, content = parser.request(access_token_uri, method = 'POST', body = params, headers = headers)
         content = json.loads(content)
-        logging.info(type(content))
         tokendata = content['access_token']
+        logging.info('ORIGINAL TOKEN - ' + tokendata)
+        response = HttpResponseRedirect('/pages/dashboard')
+        signer = Signer('secretKey')
+        encryptedToken = signer.sign(tokendata)
+        logging.info('ENCRYPTED TOKEN - ' + encryptedToken)
+        response.set_cookie("ACCESSTOKEN", encryptedToken)
 
-        #request.session['ACCESSTOKEN'] = tokendata
-        # resp, content = parser.request("https://www.googleapis.com/oauth2/v1/userinfo?access_token={accessToken}".format(
-        #         accessToken=token_data['access_token']))
-        # this gets the google profile!!
-        # google_profile = json.load(content)
-
-        # log the user in-->
-        # HERE YOU LOG THE USER IN, OR ANYTHING ELSE YOU WANT
-        # THEN REDIRECT TO PROTECTED PAGE
-
-
-        return HttpResponseRedirect('/pages/dashboard')
+        return response
 
     else:
         return HttpResponseRedirect('/pages/welcome')
