@@ -4,6 +4,7 @@ from django.core import signing
 import logging
 
 
+
 # Create your views here.
 
 def welcome(request):
