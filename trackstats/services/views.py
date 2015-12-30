@@ -44,7 +44,7 @@ def timestamp_converter_nanos(date_time):
 
 
 # Returns average stats about last month for dashboard
-def last_month_stats(request):
+def dashboard(request):
 	oauthAccessToken = signer.unsign(request.COOKIES["ACCESSTOKEN"])
 
 	rawEndTime = datetime.datetime.now()
@@ -59,21 +59,38 @@ def last_month_stats(request):
 	params = {'access_token' : oauthAccessToken  }
 	lastmonth_datasetId = str(startTimeNanos) + "-" + str(endTimeNanos) 
 
+	# Last month calories summary request
 	lastmonth_calories_dataSourceId = "derived:com.google.calories.bmr:com.google.android.gms:merged"
 	caloriesOptions = {'userId': 'me' , 'dataSourceId': lastmonth_calories_dataSourceId , 'datasetId': lastmonth_datasetId }
-
-	# probably not needed  
 	lastmonth_calories_summary_url = "https://www.googleapis.com/fitness/v1/users/{userId}/dataSources/{dataSourceId}/datasets/{datasetId}".format(**caloriesOptions)
-	r = requests.get(lastmonth_calories_summary_url, params = params )
-	data = r.json()
-	#print(data)
+	rCalories = requests.get(lastmonth_calories_summary_url, params = params )
+	# This variable should be handled to access last month calories data 
+	caloriesData = rCalories.json()
 
+	lastMonthSessions = get_sessions(request, startTime, endTime)
 
-	return HttpResponse(str(data))
+	return HttpResponse(lastMonthSessions)
+	#return HttpResponse(str(caloriesData))
 	# return HttpResponse(startTime + '---' + endTime)
 	#return HttpResponse(get_summary_url)
 	#return HttpResponse(lastmonth_datasetId)
 
+# This function returns all sessions for a given time interval
+def get_sessions(request,sTime,eTime):
+	
+	oauthAccessToken = signer.unsign(request.COOKIES["ACCESSTOKEN"])
+
+	startTime = sTime
+	endTime = eTime
+	session_params  = {'startTime':startTime , 'endTime': endTime , 'access_token' : oauthAccessToken  }
+
+	get_sessions_url = "https://www.googleapis.com/fitness/v1/users/me/sessions"
+	r = requests.get(get_sessions_url, params = session_params )
+	# print(r.status_code)
+	data = r.json()
+
+	return (str(data))
+	
 
 # Returns a list of all sessions of the user starting from the beginning of timestamps until today
 def all_sessions(request):
@@ -89,7 +106,6 @@ def all_sessions(request):
 	r = requests.get(get_sessions_url, params = params )
 	# print(r.status_code)
 	data = r.json()
-	#data = json.loads(r)
 
 	return HttpResponse(str(data))
 
@@ -101,12 +117,10 @@ def select_session(request):
 	dataSourceId = ""
 	# The ID is formatted like: "startTime-endTime" where startTime and endTime are
 	# 64 bit integers (epoch time with nanoseconds).
-	#datasetId = "1448983095955-144898712705"
 	datasetId = "1397513334728708316-2397515179728708316"
 		
 
 	# select_session_url = "https://www.googleapis.com/fitness/v1/users/me/dataSources/dataSourceId/datasets/datasetId"
-	#https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.step_count.delta:com.google.android.gms:estimated_steps/datasets/1397513334728708316-2397515179728708316?access_token=ya29.WQLcdzzGy0WQ5KvEP7RABSi4audkXnY1m-IIiYR94Ac6vxL5T8eBIANLdu99anPJBdlB
 	select_session_url = "https://www.googleapis.com/fitness/v1/users/me/dataSources/"+ dataSourceId + "/datasets/" + datasetId + "?access_token=" + oauthAccessToken
 	r = requests.get(select_session_url)
 
