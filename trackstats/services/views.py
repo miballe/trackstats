@@ -39,7 +39,7 @@ signer = Signer('secretKey')
 
 def last_month_stats(request):
 
-	oauthAccessToken = signer.unsign(request.COOKIES["ACCESSTOKEN"])
+	oauthAccessToken = signer.unsign(request.COOKIES.get("ACCESSTOKEN"))
 	rawEndTime = datetime.datetime.now()
 	endTime = rawEndTime.strftime('%Y-%m-%dT%H:%M:%S.00Z')
 	startTime = (rawEndTime - timedelta(days=30)).strftime('%Y-%m-%dT%H:%M:%S.00Z')
@@ -57,7 +57,7 @@ def last_month_stats(request):
 
 
 def all_sessions(request):
-	oauthAccessToken = signer.unsign(request.COOKIES["ACCESSTOKEN"])
+	oauthAccessToken = signer.unsign(request.COOKIES.get("ACCESSTOKEN"))
 	startTime = "1970-01-01T00:00:00.00Z" 
 	endTime = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.00Z')
 	params = {'startTime':startTime , 'endTime': endTime , 'access_token' : oauthAccessToken  }

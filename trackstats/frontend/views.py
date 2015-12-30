@@ -12,6 +12,8 @@ def welcome(request):
 
 def dashboard(request):
     signer = Signer('secretKey')
-    accesstoken = signer.unsign(request.COOKIES["ACCESSTOKEN"])
+    if request.COOKIES.get("ACCESSTOKEN"):
+        accesstoken = signer.unsign(request.COOKIES.get("ACCESSTOKEN"))
+
     logging.info('DECRYPTED TOKEN - ' + accesstoken)
     return render(request, 'frontend/dashboard.html')

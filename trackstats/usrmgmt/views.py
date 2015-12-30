@@ -34,8 +34,9 @@ def login(request):
             client_id=client_id,
             redirect_uri=redirect_uri,
             scope=scope)
-    return HttpResponseRedirect(url)
 
+    response = HttpResponseRedirect(url)
+    return response
 
 
 
@@ -63,11 +64,17 @@ def auth(request):
         content = json.loads(content)
         tokendata = content['access_token']
         logging.info('ORIGINAL TOKEN - ' + tokendata)
-        response = HttpResponseRedirect('/pages/dashboard')
+        redirection = request.COOKIES.get('REDIRECTION')
+        if redirection:
+            response = HttpResponseRedirect(redirection)
+            response.delete_cookie('REDIRECTION')
+        else:
+            response = HttpResponseRedirect('/pages/dashboard')
+
         signer = Signer('secretKey')
         encryptedToken = signer.sign(tokendata)
         logging.info('ENCRYPTED TOKEN - ' + encryptedToken)
-        response.set_cookie("ACCESSTOKEN", encryptedToken)
+        response.set_cookie("ACCESSTOKEN", encryptedToken, max_age=9000)
 
         return response
 

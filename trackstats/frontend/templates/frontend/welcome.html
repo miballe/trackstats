@@ -20,7 +20,19 @@
     <script>
         function onSignIn(googleUser) {
 
-            window.location = 'http://localhost:8080/usr/login';
+            function getParameterByName(name) {
+                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                        results = regex.exec(location.search);
+                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+
+            if (getParameterByName("redirect")){
+                document.cookie="REDIRECTION=" + getParameterByName("redirect");
+                window.location = 'http://localhost:8080/usr/login?redirect='+getParameterByName("redirect");
+            } else{
+                window.location = 'http://localhost:8080/usr/login';
+            }
 
         }
     </script>
