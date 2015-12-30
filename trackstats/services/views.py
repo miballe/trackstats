@@ -66,6 +66,7 @@ def dashboard(request):
 	rCalories = requests.get(lastmonth_calories_summary_url, params = params )
 	# This variable should be handled to access last month calories data 
 	caloriesData = rCalories.json()
+	
 
 	lastMonthSessions = get_sessions(request, startTime, endTime)
 
@@ -119,8 +120,6 @@ def select_session(request):
 	# 64 bit integers (epoch time with nanoseconds).
 	datasetId = "1397513334728708316-2397515179728708316"
 		
-
-	# select_session_url = "https://www.googleapis.com/fitness/v1/users/me/dataSources/dataSourceId/datasets/datasetId"
 	select_session_url = "https://www.googleapis.com/fitness/v1/users/me/dataSources/"+ dataSourceId + "/datasets/" + datasetId + "?access_token=" + oauthAccessToken
 	r = requests.get(select_session_url)
 
