@@ -69,7 +69,8 @@ def dashboard(request):
 	caloriesData = rCalories.json()
 	
 
-	lastMonthSessions = get_sessions(request, startTime, endTime)
+	# lastMonthSessions = get_sessions(request, startTime, endTime)
+	lastMonthSessions = get_total_distance(request, startTimeNanos, endTimeNanos)
 
 	return HttpResponse(lastMonthSessions)
 	#return HttpResponse(str(caloriesData))
@@ -77,7 +78,10 @@ def dashboard(request):
 	#return HttpResponse(get_summary_url)
 	#return HttpResponse(lastmonth_datasetId)
 
+
 # This function returns all sessions for a given time interval
+# @request
+# @sTime,eTime - strings from timestamps (in proper format!)
 def get_sessions(request,sTime,eTime):
 	
 	oauthAccessToken = signer.unsign(request.COOKIES["ACCESSTOKEN"])
@@ -94,15 +98,13 @@ def get_sessions(request,sTime,eTime):
 	# testing json handling
 	sessions = data["session"]
 	
-	# sessions Number - to be displayed on dashboard !!
-	sessionsNumber = len(sessions)
-	
-	
-	
-	return sessions
 	# (ses[0]['activityType'])
+	return sessions
 	
 	
+# This function returns the number of sessions for a given time interval.	
+# @request
+# @sTime,eTime - strings from timestamps (in proper format!)
 def get_sessions_number(request,sTime,eTime):
 	
 	oauthAccessToken = signer.unsign(request.COOKIES["ACCESSTOKEN"])
@@ -123,6 +125,81 @@ def get_sessions_number(request,sTime,eTime):
 	sessionsNumber = len(sessions)
 	
 	return sessionsNumber
+
+
+# Function that returns the last weight value or a string that promts user to submit weight.	
+# @request
+# @startTimeNanos,endTimeNanos - epoch time in nanoseconds
+def get_weight(request,startTimeNanos,endTimeNanos):
+	
+	oauthAccessToken = signer.unsign(request.COOKIES["ACCESSTOKEN"])
+
+	session_params  = {'access_token' : oauthAccessToken  }
+	
+	get_url1 = "https://www.googleapis.com/fitness/v1/users/me/"
+	get_url2 = "dataSources/derived:com.google.weight:com.google.android.gms:merge_weight/"
+	get_url3 = "datasets/" + str(startTimeNanos) + "-" + str(endTimeNanos)
+	get_url_all = get_url1 + get_url2 + get_url3
+	
+	r = requests.get(get_url_all, params = session_params )
+	
+	weightdata = r.json()["point"]
+	iter = len(weightdata)
+	weight = "Submit Weight!"
+	for it in weightdata:
+		weight = it["value"][0]["fpVal"]
+
+	return weight
+	
+	
+# Function that returns total calories on a given time interval - incomplete.
+# @request
+# @startTimeNanos,endTimeNanos - epoch time in nanoseconds
+def get_total_calories(request,startTimeNanos,endTimeNanos):
+	
+	oauthAccessToken = signer.unsign(request.COOKIES["ACCESSTOKEN"])
+
+	session_params  = {'access_token' : oauthAccessToken  }
+	
+	get_url1 = "https://www.googleapis.com/fitness/v1/users/me/"
+	get_url2 = "dataSources/derived:com.google.calories.expended:com.google.android.gms:from_activities/"
+	get_url3 = "datasets/" + str(startTimeNanos) + "-" + str(endTimeNanos)
+	get_url_all = get_url1 + get_url2 + get_url3
+	
+	r = requests.get(get_url_all, params = session_params )
+	
+	caloriesdata = r.json()["point"]
+	
+	totalcalories = 0
+	for it in caloriesdata:
+		totalcalories += it["value"][0]["fpVal"]
+
+	return totalcalories
+	
+	
+# Function that returns total calories on a given time interval - incomplete.
+# @request
+# @startTimeNanos,endTimeNanos - epoch time in nanoseconds
+def get_total_distance(request,startTimeNanos,endTimeNanos):
+	
+	oauthAccessToken = signer.unsign(request.COOKIES["ACCESSTOKEN"])
+
+	session_params  = {'access_token' : oauthAccessToken  }
+	
+	get_url1 = "https://www.googleapis.com/fitness/v1/users/me/"
+	get_url2 = "dataSources/derived:com.google.distance.delta:com.google.android.gms:merge_distance_delta/"
+	get_url3 = "datasets/" + str(startTimeNanos) + "-" + str(endTimeNanos)
+	get_url_all = get_url1 + get_url2 + get_url3
+	
+	r = requests.get(get_url_all, params = session_params )
+	
+	data = r.json()["point"]
+	
+	totaldistance = 0
+	for it in data:
+		totaldistance += it["value"][0]["fpVal"]
+
+	return totaldistance
 
 	
 
