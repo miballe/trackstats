@@ -121,3 +121,5 @@ def sessions(request):
 def sessiondetails(request):
     return HttpResponse("{sessionid: 'r38w29jk', date: '2015-12-04', calories: 348, distancekm: 4.8, avgspdkmh: 8.7, durationmins: 45, starttime: '08:35:26', endtime: '09:20:47'}")
 
+def get_datasources(request):
+	return HttpResponse("make me!")
