@@ -7,6 +7,7 @@ import json
 import os
 from django.core.signing import Signer
 import ssl
+import logging
 
 import requests
 from pprint import pprint
@@ -90,7 +91,39 @@ def get_sessions(request,sTime,eTime):
 	# print(r.status_code)
 	data = r.json()
 
-	return (str(data))
+	# testing json handling
+	sessions = data["session"]
+	
+	# sessions Number - to be displayed on dashboard !!
+	sessionsNumber = len(sessions)
+	
+	
+	
+	return sessions
+	# (ses[0]['activityType'])
+	
+	
+def get_sessions_number(request,sTime,eTime):
+	
+	oauthAccessToken = signer.unsign(request.COOKIES["ACCESSTOKEN"])
+
+	startTime = sTime
+	endTime = eTime
+	session_params  = {'startTime':startTime , 'endTime': endTime , 'access_token' : oauthAccessToken  }
+
+	get_sessions_url = "https://www.googleapis.com/fitness/v1/users/me/sessions"
+	r = requests.get(get_sessions_url, params = session_params )
+	# print(r.status_code)
+	data = r.json()
+
+	# testing json handling
+	sessions = data["session"]
+	
+	# sessions Number - to be displayed on dashboard !!
+	sessionsNumber = len(sessions)
+	
+	return sessionsNumber
+
 	
 
 # Returns a list of all sessions of the user starting from the beginning of timestamps until today
