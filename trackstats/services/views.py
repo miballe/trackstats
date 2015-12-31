@@ -45,8 +45,9 @@ def timestamp_converter_nanos(date_time):
 
 
 # Returns average stats about last month for dashboard
-def dashboard(request):
+def dashboard2(request):
 	oauthAccessToken = signer.unsign(request.COOKIES.get("ACCESSTOKEN"))
+
 
 	rawEndTime = datetime.datetime.now()
 	endTime = rawEndTime.strftime('%Y-%m-%dT%H:%M:%S.00Z')
@@ -246,3 +247,6 @@ def sessiondetails(request):
 
 def get_datasources(request):
 	return HttpResponse("make me!")
+	
+def dashboard(request):
+    return HttpResponse("{'calories': 1234.56, 'distance': 34567.345, 'nsessions': 6, 'weight': 89.4}")
