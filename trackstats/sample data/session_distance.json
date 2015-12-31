@@ -1,0 +1,955 @@
+{
+ "minStartTimeNs": "1448983095955000000",
+ "maxEndTimeNs": "1448987127050000000",
+ "dataSourceId": "derived:com.google.distance.delta:com.google.android.gms:merge_distance_delta",
+ "point": [
+  {
+   "startTimeNanos": "1448983096601000000",
+   "endTimeNanos": "1448983109019000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 16.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240680"
+  },
+  {
+   "startTimeNanos": "1448983349239000000",
+   "endTimeNanos": "1448983379284000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 41.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987233257"
+  },
+  {
+   "startTimeNanos": "1448983423316000000",
+   "endTimeNanos": "1448983467240000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 75.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987233257"
+  },
+  {
+   "startTimeNanos": "1448983467240000000",
+   "endTimeNanos": "1448983499260000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 45.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987233257"
+  },
+  {
+   "startTimeNanos": "1448983499260000000",
+   "endTimeNanos": "1448983529234000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 51.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987233257"
+  },
+  {
+   "startTimeNanos": "1448983529234000000",
+   "endTimeNanos": "1448983559308000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 46.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987233257"
+  },
+  {
+   "startTimeNanos": "1448983649554000000",
+   "endTimeNanos": "1448983679841000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 53.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987233257"
+  },
+  {
+   "startTimeNanos": "1448983687767000000",
+   "endTimeNanos": "1448983739707000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 87.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987233257"
+  },
+  {
+   "startTimeNanos": "1448983739707000000",
+   "endTimeNanos": "1448983769938000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 37.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987233257"
+  },
+  {
+   "startTimeNanos": "1448983769938000000",
+   "endTimeNanos": "1448983799907000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 53.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987233257"
+  },
+  {
+   "startTimeNanos": "1448983799907000000",
+   "endTimeNanos": "1448983828262000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 47.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987233257"
+  },
+  {
+   "startTimeNanos": "1448983828262000000",
+   "endTimeNanos": "1448983858344000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 48.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987233257"
+  },
+  {
+   "startTimeNanos": "1448983889275000000",
+   "endTimeNanos": "1448983914513000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 35.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987233257"
+  },
+  {
+   "startTimeNanos": "1448983914513000000",
+   "endTimeNanos": "1448983936105000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 40.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987233257"
+  },
+  {
+   "startTimeNanos": "1448983936105000000",
+   "endTimeNanos": "1448983979364000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 70.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987233257"
+  },
+  {
+   "startTimeNanos": "1448983979364000000",
+   "endTimeNanos": "1448984009198000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 56.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987233257"
+  },
+  {
+   "startTimeNanos": "1448984009198000000",
+   "endTimeNanos": "1448984039215000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 50.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987233257"
+  },
+  {
+   "startTimeNanos": "1448984039215000000",
+   "endTimeNanos": "1448984069164000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 43.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987233257"
+  },
+  {
+   "startTimeNanos": "1448984188259000000",
+   "endTimeNanos": "1448984193500000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 5.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987233257"
+  },
+  {
+   "startTimeNanos": "1448984278516000000",
+   "endTimeNanos": "1448984295278000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 42.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448984295278000000",
+   "endTimeNanos": "1448984360765000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 8.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448984360765000000",
+   "endTimeNanos": "1448984429322000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 49.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448984430193000000",
+   "endTimeNanos": "1448984517233000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 6.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448984517233000000",
+   "endTimeNanos": "1448984548556000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 4.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448984548556000000",
+   "endTimeNanos": "1448984577615000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 5.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448984577615000000",
+   "endTimeNanos": "1448984608295000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 7.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448984608295000000",
+   "endTimeNanos": "1448984637255000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 13.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448984637255000000",
+   "endTimeNanos": "1448984669374000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 39.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448984669374000000",
+   "endTimeNanos": "1448984698157000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 40.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448984698157000000",
+   "endTimeNanos": "1448984722215000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 18.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448984722215000000",
+   "endTimeNanos": "1448984744319000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 68.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448984744319000000",
+   "endTimeNanos": "1448984785162000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 180.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448984785162000000",
+   "endTimeNanos": "1448984819177000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 125.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448984819177000000",
+   "endTimeNanos": "1448984849185000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 8.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448984849185000000",
+   "endTimeNanos": "1448984875176000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 93.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448984875176000000",
+   "endTimeNanos": "1448984909318000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 22.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448984909318000000",
+   "endTimeNanos": "1448984935158000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 13.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448984935158000000",
+   "endTimeNanos": "1448984969365000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 24.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448984969365000000",
+   "endTimeNanos": "1448984999360000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 14.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448984999360000000",
+   "endTimeNanos": "1448985027569000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 15.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985027569000000",
+   "endTimeNanos": "1448985058157000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 2.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985058157000000",
+   "endTimeNanos": "1448985067750000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 2.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985067750000000",
+   "endTimeNanos": "1448985118147000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 5.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985118147000000",
+   "endTimeNanos": "1448985142129000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 28.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985142129000000",
+   "endTimeNanos": "1448985165148000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 10.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985165148000000",
+   "endTimeNanos": "1448985235179000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 16.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985235179000000",
+   "endTimeNanos": "1448985254143000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 70.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985254143000000",
+   "endTimeNanos": "1448985389160000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 97.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985389160000000",
+   "endTimeNanos": "1448985408260000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 29.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985408260000000",
+   "endTimeNanos": "1448985425268000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 76.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985425268000000",
+   "endTimeNanos": "1448985479295000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 51.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985479295000000",
+   "endTimeNanos": "1448985484485000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 7.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985484485000000",
+   "endTimeNanos": "1448985539327000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 78.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985539327000000",
+   "endTimeNanos": "1448985566192000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 30.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985566192000000",
+   "endTimeNanos": "1448985591537000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 38.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985591537000000",
+   "endTimeNanos": "1448985620175000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 37.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985620175000000",
+   "endTimeNanos": "1448985646708000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 37.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985646708000000",
+   "endTimeNanos": "1448985686385000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 82.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985686385000000",
+   "endTimeNanos": "1448985724065000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 51.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985724065000000",
+   "endTimeNanos": "1448985778547000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 102.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985778547000000",
+   "endTimeNanos": "1448985805205000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 47.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985805205000000",
+   "endTimeNanos": "1448985824666000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 26.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985824666000000",
+   "endTimeNanos": "1448985899225000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 74.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985899225000000",
+   "endTimeNanos": "1448985916259000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 22.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985916259000000",
+   "endTimeNanos": "1448985950287000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 36.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985950287000000",
+   "endTimeNanos": "1448985987480000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 25.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448985987480000000",
+   "endTimeNanos": "1448986014466000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 38.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448986079275000000",
+   "endTimeNanos": "1448986109447000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 26.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448986139196000000",
+   "endTimeNanos": "1448986169313000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 12.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448986229189000000",
+   "endTimeNanos": "1448986259241000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 44.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448986379210000000",
+   "endTimeNanos": "1448986408285000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 43.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448986408285000000",
+   "endTimeNanos": "1448986439571000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 52.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448986468291000000",
+   "endTimeNanos": "1448986498227000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 51.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448986498227000000",
+   "endTimeNanos": "1448986529255000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 44.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448986559470000000",
+   "endTimeNanos": "1448986589375000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 45.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448986589375000000",
+   "endTimeNanos": "1448986619400000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 47.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448986619400000000",
+   "endTimeNanos": "1448986649305000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 44.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448986679315000000",
+   "endTimeNanos": "1448986709398000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 48.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  },
+  {
+   "startTimeNanos": "1448986709398000000",
+   "endTimeNanos": "1448986737227000000",
+   "dataTypeName": "com.google.distance.delta",
+   "originDataSourceId": "raw:com.google.location.sample:com.google.android.gms:samsung:GT-I9300:7d091371:",
+   "value": [
+    {
+     "fpVal": 46.0
+    }
+   ],
+   "modifiedTimeMillis": "1448987240604"
+  }
+ ]
+}

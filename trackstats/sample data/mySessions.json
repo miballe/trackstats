@@ -1,0 +1,25 @@
+{u'session': 
+	[{u'startTimeMillis': u'1448983095955',
+		u'id': u'd4addc12fb42b54b:activemode:walking:1448983095955',
+		u'activityType': 7,
+		u'modifiedTimeMillis': u'1448987254959',
+		u'endTimeMillis': u'1448987127050',
+		u'application': {u'packageName': u'com.google.android.apps.fitness'},
+		u'name': u'Afternoon walking'
+	}, 
+	{u'startTimeMillis': u'1451493869506',
+		u'id': u'd4addc12fb42b54b:activemode:walking:1451493869506',
+		u'activityType': 7, u'modifiedTimeMillis': u'1451495003337',
+		u'endTimeMillis': u'1451494113312',
+		u'application': {u'packageName': u'com.google.android.apps.fitness'},
+		u'name': u'Evening walking'
+	}, 
+	{u'startTimeMillis': u'1451494137234',
+		u'id': u'd4addc12fb42b54b:activemode:walking:1451494137234',
+		u'activityType': 7,
+		u'modifiedTimeMillis': u'1451495003346',
+		u'endTimeMillis': u'1451494830941',
+		u'application': {u'packageName': u'com.google.android.apps.fitness'},
+		u'name': u'Evening walking'
+	}]
+}
