@@ -16,4 +16,4 @@ def dashboard(request):
         accesstoken = signer.unsign(request.COOKIES.get("ACCESSTOKEN"))
 
     logging.info('DECRYPTED TOKEN - ' + accesstoken)
-    return render(request, 'frontend/dashboard.html')
+    return render(request, 'frontend/newdash.html')
