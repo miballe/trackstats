@@ -46,7 +46,7 @@ def timestamp_converter_nanos(date_time):
 
 # Returns average stats about last month for dashboard
 def dashboard(request):
-	oauthAccessToken = signer.unsign(request.COOKIES.get["ACCESSTOKEN"])
+	oauthAccessToken = signer.unsign(request.COOKIES.get("ACCESSTOKEN"))
 
 	rawEndTime = datetime.datetime.now()
 	endTime = rawEndTime.strftime('%Y-%m-%dT%H:%M:%S.00Z')
@@ -84,7 +84,7 @@ def dashboard(request):
 # @sTime,eTime - strings from timestamps (in proper format!)
 def get_sessions(request,sTime,eTime):
 
-	oauthAccessToken = signer.unsign(request.COOKIES.get["ACCESSTOKEN"])
+	oauthAccessToken = signer.unsign(request.COOKIES.get("ACCESSTOKEN"))
 
 	startTime = sTime
 	endTime = eTime
@@ -107,7 +107,7 @@ def get_sessions(request,sTime,eTime):
 # @sTime,eTime - strings from timestamps (in proper format!)
 def get_sessions_number(request,sTime,eTime):
 
-	oauthAccessToken = signer.unsign(request.COOKIES.get["ACCESSTOKEN"])
+	oauthAccessToken = signer.unsign(request.COOKIES.get("ACCESSTOKEN"))
 
 	startTime = sTime
 	endTime = eTime
@@ -132,7 +132,7 @@ def get_sessions_number(request,sTime,eTime):
 # @startTimeNanos,endTimeNanos - epoch time in nanoseconds
 def get_weight(request,startTimeNanos,endTimeNanos):
 
-	oauthAccessToken = signer.unsign(request.COOKIES.get["ACCESSTOKEN"])
+	oauthAccessToken = signer.unsign(request.COOKIES.get("ACCESSTOKEN"))
 
 	session_params  = {'access_token' : oauthAccessToken  }
 
@@ -157,7 +157,7 @@ def get_weight(request,startTimeNanos,endTimeNanos):
 # @startTimeNanos,endTimeNanos - epoch time in nanoseconds
 def get_total_calories(request,startTimeNanos,endTimeNanos):
 
-	oauthAccessToken = signer.unsign(request.COOKIES.get["ACCESSTOKEN"])
+	oauthAccessToken = signer.unsign(request.COOKIES.get("ACCESSTOKEN"))
 
 	session_params  = {'access_token' : oauthAccessToken  }
 
@@ -182,7 +182,7 @@ def get_total_calories(request,startTimeNanos,endTimeNanos):
 # @startTimeNanos,endTimeNanos - epoch time in nanoseconds
 def get_total_distance(request,startTimeNanos,endTimeNanos):
 
-	oauthAccessToken = signer.unsign(request.COOKIES.get["ACCESSTOKEN"])
+	oauthAccessToken = signer.unsign(request.COOKIES.get("ACCESSTOKEN"))
 
 	session_params  = {'access_token' : oauthAccessToken  }
 
@@ -206,7 +206,7 @@ def get_total_distance(request,startTimeNanos,endTimeNanos):
 # Returns a list of all sessions of the user starting from the beginning of timestamps until today
 def all_sessions(request):
 
-	oauthAccessToken = signer.unsign(request.COOKIES.get["ACCESSTOKEN"])
+	oauthAccessToken = signer.unsign(request.COOKIES.get("ACCESSTOKEN"))
 
 	startTime = EPOCH_START
 	endTime = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.00Z')
