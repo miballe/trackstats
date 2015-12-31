@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Simple Leaflet Map</title>
+	<meta charset="utf-8" />
+	<link 
+		rel="stylesheet" 
+		href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"
+	/>
+</head>
+<body>
+	<div id="map" style="width: 600px; height: 400px"></div>
+
+	<script
+		src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js">
+	</script>
+
+	<script>
+		var map = L.map('map').setView([50.900387, -1.394315], 12);
+		mapLink = 
+			'<a href="http://openstreetmap.org">OpenStreetMap</a>';
+		L.tileLayer(
+			'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution: '&copy; ' + mapLink + ' Contributors',
+			maxZoom: 28,
+			}).addTo(map);
+		
+//		d3.json("graph.json", function(error, graph) {
+		
+		var polyline = L.polyline([
+			[50.934578, -1.396476],
+			[50.929284, -1.394833],
+			[50.926999, -1.390816],
+			[50.923596, -1.394963],
+			[50.920915, -1.404823],
+			[50.928265, -1.405684],
+			[50.932326, -1.402371],
+			[50.929284, -1.394807],
+			],
+			{
+				color: 'red',
+				weight: 10,
+				opacity: .7,
+				dashArray: '20,15',
+				lineJoin: 'round'
+			}
+			).addTo(map);
+//		}
+	</script>
+</body>
+</html>
