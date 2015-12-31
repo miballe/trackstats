@@ -16,6 +16,7 @@ credentials_dir = os.path.join(os.path.dirname(__file__), '../ClientIDSecret.jso
 ACT_READ = "https://www.googleapis.com/auth/fitness.activity.read"
 LOC_READ = "https://www.googleapis.com/auth/fitness.location.read"
 BODY_READ = "https://www.googleapis.com/auth/fitness.body.read"
+PROFILE = "https://www.googleapis.com/auth/userinfo.profile"
 with open(credentials_dir, mode = 'r') as cred:
 	data = json.load(cred)
 	CLIENT_ID = data["web"]["client_id"]
@@ -27,7 +28,7 @@ def login(request):
     response_type = "code"
     client_id = CLIENT_ID
     redirect_uri = "http://localhost:8080/usr/loginac/"
-    scope = ACT_READ+' '+LOC_READ+' '+BODY_READ
+    scope = ACT_READ+' '+LOC_READ+' '+BODY_READ+' '+PROFILE
     url = "{token_request_uri}?response_type={response_type}&client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}".format(
             token_request_uri=token_request_uri,
             response_type=response_type,
@@ -74,7 +75,7 @@ def auth(request):
         signer = Signer('secretKey')
         encryptedToken = signer.sign(tokendata)
         logging.info('ENCRYPTED TOKEN - ' + encryptedToken)
-        response.set_cookie("ACCESSTOKEN", encryptedToken, max_age=9000)
+        response.set_cookie("ACCESSTOKEN", encryptedToken, max_age=5000)
 
         return response
 
