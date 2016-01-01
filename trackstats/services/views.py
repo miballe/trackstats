@@ -114,7 +114,7 @@ def get_weight(token,startTimeNanos,endTimeNanos):
 		return HttpResponse("We cant process your request right now, please try again later ...")
 
 
-# Function that returns total calories on a given time interval - incomplete.
+# Function that returns calories data on a given time interval.
 # @request
 # @startTimeNanos,endTimeNanos - epoch time in nanoseconds
 # @boo : boolean parameter - True to return the dataset to be plotted - False for total calories only
@@ -150,6 +150,51 @@ def get_calories(token,startTimeNanos,endTimeNanos, boo):
 		return HttpResponse("We cant process your request right now, please try again later ...")
 
 	
+# Function that returns location data on a given time interval.
+# @request
+# @startTimeNanos,endTimeNanos - epoch time in nanoseconds
+# data is formatted and exported in format requested by fronted.
+def get_location(token,startTimeNanos,endTimeNanos):
+	try:
+		session_params  = {'access_token' : token }
+
+		# Set parameters for request
+		datasetId = str(startTimeNanos) + "-" + str(endTimeNanos)
+
+		# Last month calories summary request
+		dataSourceId = "derived:com.google.location.sample:com.google.android.gms:merge_location_samples"
+		options = {'userId': 'me' , 'dataSourceId': dataSourceId , 'datasetId': datasetId }
+		url = "https://www.googleapis.com/fitness/v1/users/{userId}/dataSources/{dataSourceId}/datasets/{datasetId}".format(**options)
+
+		r = requests.get(url, params = session_params )
+
+
+		rawData = r.json()["point"]
+		
+		
+		# com.google.location.sample	The user's current location.	
+		# Permission: Location	
+		# List items in ["value"]
+		# [0] : latitude (float : degrees)
+		# [1] : longitude (float : degrees)
+		# [2] : accuracy (float : meters)
+		# [3] : altitude (float : meters)
+
+		data = []
+		for it in rawData:
+			data.append([it["value"][0]["fpVal"], it["value"][1]["fpVal"]])
+
+		# data format:
+		# [[lat,lon], ...]
+		return data
+		
+	except KeyError:
+		return HttpResponse("Invalid Data Format. Potential empty googleFit Account")
+	except:
+		return HttpResponse("We cant process your request right now, please try again later ...")
+
+	
+
 
 
 	
@@ -257,3 +302,42 @@ def get_session_details(request):
 	
 	return HttpResponse([average, data])
 	
+# ...
+def workout(request):
+
+# def workout(request, startTime, endTime):
+# ?startTime=1448983095955&endTime=1548987127050
+# adding the above did not give the values to the script - how to give them?
+	
+	oauthAccessToken = signer.unsign(request.COOKIES.get("ACCESSTOKEN"))
+	# oauthAccessToken = "ya29.WgK0DSor04y7F7phLwE4DOzE_Pwmuvr_0sAnl9QXQcf0WQ7DG_PwU0YZCl7CQ9bNyppm"
+	
+	
+	# startTime = request.GET["startTime"]
+	# endTime = request.GET["endTime"]
+	
+	# hardcoded times - we need them from the front end from users choice !!!
+	startTime = 1448983095955
+	endTime = 1548987127050
+	# ?startTime=1448983095955&endTime=1548987127050
+
+	# Start - End times in epoch nanoseconds time format
+	endTimeNanos = millis_converter_nanos(endTime)
+	startTimeNanos = millis_converter_nanos(startTime)
+	
+	logging.info(endTimeNanos)
+	logging.info(startTimeNanos)
+	
+	# datasetId = str(startTimeNanos) + "-" + str(endTimeNanos)
+	
+		
+	# create deliverables
+	# 0 item in list is total distance
+	# 1 item in list is data dictionary
+	# speed = get_detailed_speed(oauthAccessToken, startTimeNanos, endTimeNanos, True)
+	location = str(get_location(oauthAccessToken, startTimeNanos, endTimeNanos))
+	
+	# average = str({'avgspeed': round(speed[0],4), 'totalcalories': round(calories[0],2)})
+	# data = str(list([speed[1], calories[1]]))
+	
+	return HttpResponse(location)
