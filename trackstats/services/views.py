@@ -50,10 +50,13 @@ def dashboard(request):
 		weight = get_weight(oauthAccessToken, startTimeNanos, endTimeNanos)
 		calories = get_calories(oauthAccessToken ,startTimeNanos, endTimeNanos, False)
 		distance = get_detailed_distance(oauthAccessToken, startTimeNanos, endTimeNanos, False)
-		nSessions = get_sessions(oauthAccessToken,startTime,endTime, False)
+		ses_all = get_sessions(oauthAccessToken,startTime,endTime, True)
+		nSessions = ses_all[0]
+		sessionData = ses_all[1]
 
-		dashboardSummary = str({'calories': str(round(calories,2)), 'distance': str(round(distance,2)), 'nsessions': str(nSessions), 'weight': str(weight)})
+		dashboardSummary = str({'calories': str(round(calories,2)), 'distance': str(round(distance,2)), 'nsessions': str(nSessions), 'weight': str(weight), "sessions": sessionData})
 
+		
 		return HttpResponse(dashboardSummary)
 	except:
 		return HttpResponse("We cant process your request right now, please try again later ...")
@@ -73,7 +76,7 @@ def get_sessions(token,sTime,eTime, boo):
 		sessions = data["session"]
 
 		if boo is True:
-			return [sessions, len(sessions)]
+			return [len(sessions), sessions]
 		else:
 			return len(sessions)
 
