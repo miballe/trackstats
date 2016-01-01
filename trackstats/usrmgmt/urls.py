@@ -7,7 +7,7 @@ from . import views
 
 app_name = 'usrmgmt'
 urlpatterns = [
-    url(r'^login/$', views.login, name='auth'),
+    url(r'^login/$', views.login, name='login'),
     url(r'^loginac/$', views.auth, name='auth'),
-    url(r'^logout/$', views.logout, {'next_page': '/',}, name='logout'),
+    url(r'^logout/$', views.logout, name='logout'),
 ]

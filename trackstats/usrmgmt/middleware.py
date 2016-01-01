@@ -21,6 +21,7 @@ class loginMiddleware(object):
         if ACCESSTOKEN :
             ACCESSTOKEN = signer.unsign(ACCESSTOKEN)
         resp, content = parser.request("https://www.googleapis.com/oauth2/v1/userinfo?access_token={accessToken}".format(accessToken= ACCESSTOKEN))
+
         logging.info(resp.status)
         if DESTINATION != '/' and '/pages/welcome/' not in DESTINATION and '/usr/login/' not in DESTINATION and '/usr/loginac/' not in DESTINATION:
             if resp.status != 200:

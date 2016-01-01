@@ -7,7 +7,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="description" content="Xenon Boostrap Admin Panel" />
 	<meta name="author" content="" />
-	
 	<title>Dashboard</title>
 
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic">
@@ -431,23 +430,14 @@
 		
 				<li class="dropdown user-profile">
 					<a href="#" data-toggle="dropdown">
-						<img src="/assets/images/user-1.png" alt="user-image" class="img-circle img-inline userpic-32" width="28" />
+						<img src="{{ userimg }}" alt="user-image" class="img-circle img-inline userpic-32" width="28" />
 						<span>
-							Umar Anwar
+							{{ username }}
 							<i class="fa-angle-down"></i>
 						</span>
 					</a>
 					
 					<ul class="dropdown-menu user-profile-menu list-unstyled">
-
-
-						
-						<li>
-							<a href="#settings">
-								<i class="fa-wrench"></i>
-								Settings
-							</a>
-						</li>
 						<li>
 							<a href="#profile">
 								<i class="fa-user"></i>
@@ -461,10 +451,16 @@
 							</a>
 						</li>
 						<li class="last">
-							<a href="extra-lockscreen.html">
+
+							<a href="#" onclick="signOut();">
 								<i class="fa-lock"></i>
-								Logout
-							</a>
+								Logout</a>
+							<script>
+								function signOut() {
+
+									window.location = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080/usr/login";
+								}
+							</script>
 						</li>
 					</ul>
 				</li>

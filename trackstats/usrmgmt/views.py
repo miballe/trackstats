@@ -80,7 +80,15 @@ def auth(request):
         return response
 
     else:
-        return HttpResponseRedirect('/pages/welcome')
+        return HttpResponseRedirect('/')
 
 def logout(request):
-    return HttpResponse("Signed out!")
+    parser = Http()
+    ACCESSTOKEN = request.COOKIES.get("ACCESSTOKEN")
+    response = HttpResponseRedirect('/')
+    # resp, content = parser.request("https://accounts.google.com/Logout")
+    if ACCESSTOKEN:
+        response.delete_cookie("ACCESSTOKEN")
+
+
+    return response
