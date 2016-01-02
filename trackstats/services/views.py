@@ -55,10 +55,11 @@ def dashboard(request):
 		nSessions = ses_all[0]
 		sessionData = ses_all[1]
 
-		dashboardSummary = str({'calories': str(round(calories,2)), 'distance': str(round(distance,2)), 'nsessions': str(nSessions), 'weight': str(weight), "sessions": sessionData})
+		dashboardSummary = {'calories': round(calories,2), 'distance': round(distance,2), 'nsessions': nSessions, 'weight': weight, "sessions": sessionData}
 
-		
-		return HttpResponse(dashboardSummary)
+		response = HttpResponse()
+		response.write(dashboardSummary)
+		return response
 	except:
 		return HttpResponse(errorMessage1)
 
@@ -340,28 +341,21 @@ def workout(request):
 		calories = get_calories(oauthAccessToken, startTimeNanos, endTimeNanos, True)
 		
 		# only data no total/average here
-		location = str(get_location(oauthAccessToken, startTimeNanos, endTimeNanos))
-			
+		location = str(get_location(oauthAccessToken, startTimeNanos, endTimeNanos))	
 		
-		average = str({'avgspeed': round(speed[0],4), 'totalcalories': round(calories[0],2)})
+		average = {'avgspeed': round(speed[0],4), 'totalcalories': round(calories[0],2)}
 
-		
 		data = []
 		data.append(speed[1])
 		data.append(calories[1])
 		data.append(location)
-		data = str(data)
 		
-		response_pre = "[{average}, {data}]"
-		data_options = {"average" : average, "data" : data}
-		response = response_pre.format(**data_options)
+		results = [average, data]
 		
-		return HttpResponse(response)
+		response = HttpResponse()
+		response.write(results)
 		
-		# HttpResponse alternatives:
-		# return HttpResponse(str([average, data]))
-		# return HttpResponse([average, data])
-		# care that the data is formatted and returned in a format that it's structure is identifiable and therefore readable.
+		return response
 	except:
 		return HttpResponse(errorMessage1)
 
