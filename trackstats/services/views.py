@@ -22,7 +22,7 @@ signer = Signer('secretKey')
 errorMessage1 = "We cant process your request right now, please try again later."
 errorMessage2 = "Invalid Data Format. Potentially missing Google Fit data."
 
-# Converts time in milliseconds to nanoseconds
+# Converts time ...
 def timestamp_converter_nanos(date_time):
 	timestamp_pattern = '%Y-%m-%dT%H:%M:%S.00Z'
 	epoch = int(time.mktime(time.strptime(date_time, timestamp_pattern))) * 1000000000
@@ -292,13 +292,20 @@ def workout(request):
 		# oauthAccessToken = "ya29.WgK0DSor04y7F7phLwE4DOzE_Pwmuvr_0sAnl9QXQcf0WQ7DG_PwU0YZCl7CQ9bNyppm"
 		
 		
-		# startTime = request.GET["startTime"]
-		# endTime = request.GET["endTime"]
+		# Fixed Time issue input
+		# times are given within the get request
+		# example url for previously hardcoded times is:
+		# ?startTime=1448983095955&endTime=1548987127050
+		startTime = request.GET["startTime"]
+		endTime = request.GET["endTime"]
+		
+		startTime = int(startTime)
+		endTime = int(endTime)
 		
 		# hardcoded times - we need them from the front end from users choice !!!
-		startTime = 1448983095955
-		endTime = 1548987127050
-		# ?startTime=1448983095955&endTime=1548987127050
+		# startTime = 1448983095955
+		# endTime = 1548987127050
+		
 
 		# Start - End times in epoch nanoseconds time format
 		endTimeNanos = millis_converter_nanos(endTime)
@@ -334,6 +341,8 @@ def workout(request):
 		return HttpResponse([average, data])
 	except:
 		return HttpResponse(errorMessage1)
+
+
 	
 """
 Documentation for front end:
