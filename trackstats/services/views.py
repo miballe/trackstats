@@ -37,7 +37,6 @@ def dashboard(request):
 	try:
 		logging.info('[Services][Dashboard] Request Start')
 		oauthAccessToken = signer.unsign(request.COOKIES.get("ACCESSTOKEN"))
-		# oauthAccessToken = "ya29.WgK0DSor04y7F7phLwE4DOzE_Pwmuvr_0sAnl9QXQcf0WQ7DG_PwU0YZCl7CQ9bNyppm"
 
 		# Start-End times in timestamp format
 		rawEndTime = datetime.datetime.now()
@@ -59,7 +58,7 @@ def dashboard(request):
 		nSessions = ses_all[0]
 		sessionData = ses_all[1]
 
-		dashboardSummary = {'calories': round(calories,2), 'distance': round(distance,2), 'nsessions': nSessions, 'weight': weight, "sessions": sessionData}
+		dashboardSummary = {"calories": round(calories,2), "distance": round(distance,2), "nsessions": nSessions, "weight": weight, "sessions": sessionData}
 
 		logging.info('[Services][Dashboard] Request End')
 
@@ -83,8 +82,7 @@ def get_sessions(token,sTime,eTime, boo):
 		url = "https://www.googleapis.com/fitness/v1/users/me/sessions"
 		r = requests.get(url, params = session_params )
 		data = r.json()
-
-		logging.info('[Services][GetSessions] JSON Resp: %s', r.json())
+		logging.info('[Services][GetSessions] JSON Resp: %s', str(r.json()).encode('utf-8'))
 
 		sessions = data["session"]
 
