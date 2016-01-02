@@ -28,7 +28,7 @@ def timestamp_converter_nanos(date_time):
 	epoch = int(time.mktime(time.strptime(date_time, timestamp_pattern))) * 1000000000
 	return epoch
 
-# Converts time from milliseconds to nanoseconds	
+# Converts time from milliseconds to nanoseconds
 def millis_converter_nanos(milliseconds):
 	return milliseconds * 1000000
 
@@ -57,7 +57,7 @@ def dashboard(request):
 
 		dashboardSummary = str({'calories': str(round(calories,2)), 'distance': str(round(distance,2)), 'nsessions': str(nSessions), 'weight': str(weight), "sessions": sessionData})
 
-		
+
 		return HttpResponse(dashboardSummary)
 	except:
 		return HttpResponse(errorMessage1)
@@ -157,7 +157,7 @@ def get_calories(token,startTimeNanos,endTimeNanos, boo):
 	except:
 		return HttpResponse(errorMessage1)
 
-	
+
 # Function that returns location data on a given time interval.
 # @request
 # @startTimeNanos,endTimeNanos - epoch time in nanoseconds
@@ -178,10 +178,10 @@ def get_location(token,startTimeNanos,endTimeNanos):
 
 
 		rawData = r.json()["point"]
-		
-		
-		# com.google.location.sample	The user's current location.	
-		# Permission: Location	
+
+
+		# com.google.location.sample	The user's current location.
+		# Permission: Location
 		# List items in ["value"]
 		# [0] : latitude (float : degrees)
 		# [1] : longitude (float : degrees)
@@ -195,17 +195,17 @@ def get_location(token,startTimeNanos,endTimeNanos):
 		# data format:
 		# [[lat,lon], ...]
 		return data
-		
+
 	except KeyError:
 		return []
 	except:
 		return HttpResponse(errorMessage1)
 
-	
 
 
 
-	
+
+
 # Function that returns distance data on a given time interval - incomplete.
 # @request
 # @startTimeNanos,endTimeNanos - epoch time in nanoseconds
@@ -220,9 +220,9 @@ def get_detailed_distance(token,startTimeNanos,endTimeNanos, boo):
 		dataSourceId = "derived:com.google.distance.delta:com.google.android.gms:merge_distance_delta"
 		options = {'userId': 'me' , 'dataSourceId': dataSourceId , 'datasetId': datasetId }
 		url = "https://www.googleapis.com/fitness/v1/users/{userId}/dataSources/{dataSourceId}/datasets/{datasetId}".format(**options)
-		
+
 		session_params  = {'access_token' : token }
-		
+
 		r = requests.get(url, params = session_params )
 		data = r.json()["point"]
 
@@ -253,7 +253,7 @@ def get_detailed_distance(token,startTimeNanos,endTimeNanos, boo):
 # @boo : boolean parameter - True to return the dataset to be plotted - False for average distance only
 def get_detailed_speed(token,startTimeNanos,endTimeNanos, boo):
 	try:
-		
+
 		# Set parameters for request
 		datasetId = str(startTimeNanos) + "-" + str(endTimeNanos)
 
@@ -263,7 +263,7 @@ def get_detailed_speed(token,startTimeNanos,endTimeNanos, boo):
 		url = "https://www.googleapis.com/fitness/v1/users/{userId}/dataSources/{dataSourceId}/datasets/{datasetId}".format(**options)
 
 		session_params  = {'access_token' : token }
-		
+
 		if boo is True:
 			r = requests.get(url, params = session_params )
 			data = r.json()["point"]
@@ -288,9 +288,9 @@ def get_detailed_speed(token,startTimeNanos,endTimeNanos, boo):
 		return HttpResponse(errorMessage1)
 
 
-	
 
-# Function that gives the information required to create the session/workout page for the user (plot_data and summary). 
+
+# Function that gives the information required to create the session/workout page for the user (plot_data and summary).
 # The query from front end should include starttime and endtime in milliseconds
 # --------------> needs to be implemented !!
 # which we will need to convert them in nanoseconds.
@@ -301,63 +301,63 @@ def workout(request):
 # adding the above did not give the values to the script - how to give them?
 
 	try:
-	
+
 		oauthAccessToken = signer.unsign(request.COOKIES.get("ACCESSTOKEN"))
 		# oauthAccessToken = "ya29.WgK0DSor04y7F7phLwE4DOzE_Pwmuvr_0sAnl9QXQcf0WQ7DG_PwU0YZCl7CQ9bNyppm"
-		
-		
+
+
 		# Fixed Time issue input
 		# times are given within the get request
 		# example url for previously hardcoded times is:
 		# ?startTime=1448983095955&endTime=1548987127050
 		startTime = request.GET["startTime"]
 		endTime = request.GET["endTime"]
-		
+
 		startTime = int(startTime)
 		endTime = int(endTime)
-		
+
 		# hardcoded times - we need them from the front end from users choice !!!
 		# startTime = 1448983095955
 		# endTime = 1548987127050
-		
+
 
 		# Start - End times in epoch nanoseconds time format
 		endTimeNanos = millis_converter_nanos(endTime)
 		startTimeNanos = millis_converter_nanos(startTime)
-		
+
 		logging.info(endTimeNanos)
 		logging.info(startTimeNanos)
-		
+
 		# datasetId = str(startTimeNanos) + "-" + str(endTimeNanos)
-		
-			
+
+
 		# create deliverables
-		
+
 		# 0 item in list is total distance
 		# 1 item in list is data dictionary
-		
+
 		speed = get_detailed_speed(oauthAccessToken, startTimeNanos, endTimeNanos, True)
 		calories = get_calories(oauthAccessToken, startTimeNanos, endTimeNanos, True)
-		
+
 		# only data no total/average here
 		location = str(get_location(oauthAccessToken, startTimeNanos, endTimeNanos))
-			
-		
+
+
 		average = str({'avgspeed': round(speed[0],4), 'totalcalories': round(calories[0],2)})
 
-		
+
 		data = []
 		data.append(speed[1])
 		data.append(calories[1])
 		data.append(location)
 		data = str(data)
-		
+
 		return HttpResponse([average, data])
 	except:
 		return HttpResponse(errorMessage1)
 
 
-	
+
 """
 Documentation for front end:
 Workout Page:
