@@ -19,7 +19,7 @@ EPOCH_START = datetime.datetime.utcfromtimestamp(0)
 
 signer = Signer('secretKey')
 
-errorMessage1 = "We cant process your request right now, please try again later."
+errorMessage1 = "We can't process your request right now, please try again later."
 #errorMessage2 = "Invalid Data Format. Potentially missing Google Fit data."
 
 # Converts time ...
@@ -59,10 +59,14 @@ def dashboard(request):
 		nSessions = ses_all[0]
 		sessionData = ses_all[1]
 
-		dashboardSummary = str({'calories': str(round(calories,2)), 'distance': str(round(distance,2)), 'nsessions': str(nSessions), 'weight': str(weight), "sessions": sessionData})
+		dashboardSummary = {'calories': round(calories,2), 'distance': round(distance,2), 'nsessions': nSessions, 'weight': weight, "sessions": sessionData}
 
 		logging.info('[Services][Dashboard] Request End')
-		return HttpResponse(dashboardSummary)
+
+		response = HttpResponse()
+		response.write(dashboardSummary)
+		return response
+
 	except:
 		return HttpResponse(errorMessage1)
 
@@ -363,19 +367,24 @@ def workout(request):
 		calories = get_calories(oauthAccessToken, startTimeNanos, endTimeNanos, True)
 		
 		# only data no total/average here
-		location = str(get_location(oauthAccessToken, startTimeNanos, endTimeNanos))
-			
-		average = str({'avgspeed': round(speed[0],4), 'totalcalories': round(calories[0],2)})
+		location = str(get_location(oauthAccessToken, startTimeNanos, endTimeNanos))	
+		
+		average = {'avgspeed': round(speed[0],4), 'totalcalories': round(calories[0],2)}
 
 		data = []
 		data.append(speed[1])
 		data.append(calories[1])
 		data.append(location)
-		data = str(data)
 		
 		logging.info('[Services][Workout] Request end')
+
+		results = [average, data]
 		
-		return HttpResponse([average, data])
+		response = HttpResponse()
+		response.write(results)
+		
+		return response
+
 	except:
 		return HttpResponse(errorMessage1)
 
