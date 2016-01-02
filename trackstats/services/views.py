@@ -19,7 +19,7 @@ EPOCH_START = datetime.datetime.utcfromtimestamp(0)
 
 signer = Signer('secretKey')
 
-errorMessage1 = "We cant process your request right now, please try again later."
+errorMessage1 = "We can't process your request right now, please try again later."
 #errorMessage2 = "Invalid Data Format. Potentially missing Google Fit data."
 
 # Converts time ...
@@ -35,6 +35,7 @@ def millis_converter_nanos(milliseconds):
 # Returns average stats about last month for dashboard
 def dashboard(request):
 	try:
+		logging.info('[Services][Dashboard] Request Start')
 		oauthAccessToken = signer.unsign(request.COOKIES.get("ACCESSTOKEN"))
 		# oauthAccessToken = "ya29.WgK0DSor04y7F7phLwE4DOzE_Pwmuvr_0sAnl9QXQcf0WQ7DG_PwU0YZCl7CQ9bNyppm"
 
@@ -43,9 +44,12 @@ def dashboard(request):
 		endTime = rawEndTime.strftime('%Y-%m-%dT%H:%M:%S.00Z')
 		startTime = (rawEndTime - timedelta(days=30)).strftime('%Y-%m-%dT%H:%M:%S.00Z')
 
+		logging.info('[Services][Dashboard][StartTime] Start: %s, End: %s', startTime, endTime)
 		# Start-End times in epoch nanoseconds time format
 		endTimeNanos = timestamp_converter_nanos(endTime)
 		startTimeNanos = timestamp_converter_nanos(startTime)
+
+		logging.info('[Services][Dashboard][StartTime] StartNanos: %d, EndNanos: %d', startTimeNanos, endTimeNanos)
 
 		# Get summary data about last month for dashboard
 		weight = get_weight(oauthAccessToken, startTimeNanos, endTimeNanos)
@@ -55,10 +59,14 @@ def dashboard(request):
 		nSessions = ses_all[0]
 		sessionData = ses_all[1]
 
-		dashboardSummary = str({'calories': str(round(calories,2)), 'distance': str(round(distance,2)), 'nsessions': str(nSessions), 'weight': str(weight), "sessions": sessionData})
+		dashboardSummary = {'calories': round(calories,2), 'distance': round(distance,2), 'nsessions': nSessions, 'weight': weight, "sessions": sessionData}
 
+		logging.info('[Services][Dashboard] Request End')
 
-		return HttpResponse(dashboardSummary)
+		response = HttpResponse()
+		response.write(dashboardSummary)
+		return response
+
 	except:
 		return HttpResponse(errorMessage1)
 
@@ -69,13 +77,18 @@ def dashboard(request):
 # default return value is zero and empty set
 def get_sessions(token,sTime,eTime, boo):
 	try:
+		logging.info('[Services][GetSessions] Function start')
 		session_params  = {'startTime':sTime , 'endTime': eTime , 'access_token' : token  }
 
 		url = "https://www.googleapis.com/fitness/v1/users/me/sessions"
 		r = requests.get(url, params = session_params )
 		data = r.json()
 
+		logging.info('[Services][GetSessions] JSON Resp: %s', r.json())
+
 		sessions = data["session"]
+
+		logging.info('[Services][GetSessions] Function end')
 
 		if boo is True:
 			return [len(sessions), sessions]
@@ -96,21 +109,27 @@ def get_sessions(token,sTime,eTime, boo):
 # @request
 # @startTimeNanos,endTimeNanos - epoch time in nanoseconds
 def get_weight(token,startTimeNanos,endTimeNanos):
+	logging.info('[Services][GetWeight] Function start')
 	try:
 		session_params  = {'access_token' : token  }
 
 		last_weight_dataSourceId = "derived:com.google.weight:com.google.android.gms:merge_weight"
-		last_weight_datasetId = str(startTimeNanos) + "-" + str(endTimeNanos)
+		last_weight_datasetId = "0-" + str(endTimeNanos)
 		weightOptions = {'userId': 'me' , 'dataSourceId': last_weight_dataSourceId , 'datasetId': last_weight_datasetId }
 
 		last_weight_url = "https://www.googleapis.com/fitness/v1/users/{userId}/dataSources/{dataSourceId}/datasets/{datasetId}".format(**weightOptions)
+		logging.info('[Services][GetWeight] LastWeigth URL: %s', last_weight_url)
 		r = requests.get(last_weight_url, params = session_params )
+
+		logging.info('[Services][GetWeight] JSON Resp: %s', r.json())
 
 		weightData = r.json()["point"]
 		weight = "Submit Weight!"
 
 		for it in weightData:
 			weight = it["value"][0]["fpVal"]
+
+		logging.info('[Services][GetWeight] Function end - Return %d', weight)
 
 		return weight
 	except KeyError:
@@ -125,6 +144,7 @@ def get_weight(token,startTimeNanos,endTimeNanos):
 # @boo : boolean parameter - True to return the dataset to be plotted - False for total calories only
 def get_calories(token,startTimeNanos,endTimeNanos, boo):
 	try:
+		logging.info('[Services][GetCalories] Function start')
 		session_params  = {'access_token' : token  }
 
 		# Set parameters for request
@@ -137,6 +157,7 @@ def get_calories(token,startTimeNanos,endTimeNanos, boo):
 
 		r = requests.get(url, params = session_params )
 
+		logging.info('[Services][GetCalories] JSON Resp: %s', r.json())
 
 		data = r.json()["point"]
 		totalCalories = 0
@@ -144,6 +165,7 @@ def get_calories(token,startTimeNanos,endTimeNanos, boo):
 		for it in data:
 			totalCalories += it["value"][0]["fpVal"]
 
+		logging.info('[Services][GetCalories] Function end')
 
 		if boo is True:
 			return [totalCalories, data]
@@ -164,6 +186,7 @@ def get_calories(token,startTimeNanos,endTimeNanos, boo):
 # data is formatted and exported in format requested by fronted.
 def get_location(token,startTimeNanos,endTimeNanos):
 	try:
+		logging.info('[Services][GetLocation] Function start')
 		session_params  = {'access_token' : token }
 
 		# Set parameters for request
@@ -176,9 +199,9 @@ def get_location(token,startTimeNanos,endTimeNanos):
 
 		r = requests.get(url, params = session_params )
 
+		logging.info('[Services][GetLocation] JSON Resp: %s', r.json())
 
 		rawData = r.json()["point"]
-
 
 		# com.google.location.sample	The user's current location.
 		# Permission: Location
@@ -192,6 +215,8 @@ def get_location(token,startTimeNanos,endTimeNanos):
 		for it in rawData:
 			data.append([it["value"][0]["fpVal"], it["value"][1]["fpVal"]])
 
+		logging.info('[Services][GetCalories] Function end')
+
 		# data format:
 		# [[lat,lon], ...]
 		return data
@@ -202,17 +227,13 @@ def get_location(token,startTimeNanos,endTimeNanos):
 		return HttpResponse(errorMessage1)
 
 
-
-
-
-
 # Function that returns distance data on a given time interval - incomplete.
 # @request
 # @startTimeNanos,endTimeNanos - epoch time in nanoseconds
 # @boo : boolean parameter - True to return the dataset to be plotted - False for total distance only
 def get_detailed_distance(token,startTimeNanos,endTimeNanos, boo):
 	try:
-
+		logging.info('[Services][GetDetailedDistance] Function start')
 		# Set parameters for request
 		datasetId = str(startTimeNanos) + "-" + str(endTimeNanos)
 
@@ -224,6 +245,9 @@ def get_detailed_distance(token,startTimeNanos,endTimeNanos, boo):
 		session_params  = {'access_token' : token }
 
 		r = requests.get(url, params = session_params )
+
+		logging.info('[Services][GetDetailedDistance] JSON Resp: %s', r.json())
+
 		data = r.json()["point"]
 
 		totalDistance = 0
@@ -234,6 +258,8 @@ def get_detailed_distance(token,startTimeNanos,endTimeNanos, boo):
 			# to access them use the following:
 			# x = it["endTimeNanos"]
 			# f(x) = it["value"][0]["fpVal"]
+
+		logging.info('[Services][GetDetailedDistance] Function end')
 
 		if boo is True:
 			return [totalDistance, data]
@@ -253,7 +279,7 @@ def get_detailed_distance(token,startTimeNanos,endTimeNanos, boo):
 # @boo : boolean parameter - True to return the dataset to be plotted - False for average distance only
 def get_detailed_speed(token,startTimeNanos,endTimeNanos, boo):
 	try:
-
+		logging.info('[Services][GetDetailedDSpeed] Function start')
 		# Set parameters for request
 		datasetId = str(startTimeNanos) + "-" + str(endTimeNanos)
 
@@ -266,12 +292,16 @@ def get_detailed_speed(token,startTimeNanos,endTimeNanos, boo):
 
 		if boo is True:
 			r = requests.get(url, params = session_params )
-			data = r.json()["point"]
 
+			logging.info('[Services][GetDetailedSpeed] JSON Resp: %s', r.json())
+
+			data = r.json()["point"]
 
 		totalDistance = get_detailed_distance(token,startTimeNanos,endTimeNanos, False)
 		timeInterval = (endTimeNanos - startTimeNanos)/1000000000
 		avgspeed = totalDistance/timeInterval
+
+		logging.info('[Services][GetDetailedDSpeed] Function end')
 
 		if boo is True:
 			return [avgspeed, data]
@@ -301,10 +331,9 @@ def workout(request):
 # adding the above did not give the values to the script - how to give them?
 
 	try:
-
+		logging.info('[Services][Workout] Request start')
 		oauthAccessToken = signer.unsign(request.COOKIES.get("ACCESSTOKEN"))
 		# oauthAccessToken = "ya29.WgK0DSor04y7F7phLwE4DOzE_Pwmuvr_0sAnl9QXQcf0WQ7DG_PwU0YZCl7CQ9bNyppm"
-
 
 		# Fixed Time issue input
 		# times are given within the get request
@@ -320,7 +349,6 @@ def workout(request):
 		# startTime = 1448983095955
 		# endTime = 1548987127050
 
-
 		# Start - End times in epoch nanoseconds time format
 		endTimeNanos = millis_converter_nanos(endTime)
 		startTimeNanos = millis_converter_nanos(startTime)
@@ -329,7 +357,6 @@ def workout(request):
 		logging.info(startTimeNanos)
 
 		# datasetId = str(startTimeNanos) + "-" + str(endTimeNanos)
-
 
 		# create deliverables
 
@@ -342,21 +369,24 @@ def workout(request):
 		# only data no total/average here
 		location = str(get_location(oauthAccessToken, startTimeNanos, endTimeNanos))
 
-
-		average = str({'avgspeed': round(speed[0],4), 'totalcalories': round(calories[0],2)})
-
+		average = {'avgspeed': round(speed[0],4), 'totalcalories': round(calories[0],2)}
 
 		data = []
 		data.append(speed[1])
 		data.append(calories[1])
 		data.append(location)
-		data = str(data)
 
-		return HttpResponse([average, data])
+		logging.info('[Services][Workout] Request end')
+
+		results = [average, data]
+
+		response = HttpResponse()
+		response.write(results)
+
+		return response
+
 	except:
 		return HttpResponse(errorMessage1)
-
-
 
 """
 Documentation for front end:
