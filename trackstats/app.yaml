@@ -18,6 +18,9 @@ handlers:
 - url: /scripts
   static_dir: static/scripts
 
+- url: /data
+  static_dir: static/data
+  
 - url: /assets
   static_dir: static/assets
 
