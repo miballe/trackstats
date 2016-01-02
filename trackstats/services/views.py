@@ -19,7 +19,8 @@ EPOCH_START = datetime.datetime.utcfromtimestamp(0)
 
 signer = Signer('secretKey')
 
-
+errorMessage1 = "We cant process your request right now, please try again later."
+errorMessage2 = "Invalid Data Format. Potentially missing Google Fit data."
 
 # Converts time in milliseconds to nanoseconds
 def timestamp_converter_nanos(date_time):
@@ -59,7 +60,7 @@ def dashboard(request):
 		
 		return HttpResponse(dashboardSummary)
 	except:
-		return HttpResponse("We cant process your request right now, please try again later ...")
+		return HttpResponse(errorMessage1)
 
 # This function returns all sessions for a given time interval
 # @request
@@ -81,9 +82,9 @@ def get_sessions(token,sTime,eTime, boo):
 			return len(sessions)
 
 	except KeyError:
-		return HttpResponse("Invalid Data Format. Potential empty googleFit Account")
+		return HttpResponse(errorMessage2)
 	except:
-		return HttpResponse("We cant process your request right now, please try again later ...")
+		return HttpResponse(errorMessage1)
 
 
 
@@ -109,9 +110,9 @@ def get_weight(token,startTimeNanos,endTimeNanos):
 
 		return weight
 	except KeyError:
-		return HttpResponse("Invalid Data Format. Potential empty googleFit Account")
+		return HttpResponse(errorMessage2)
 	except:
-		return HttpResponse("We cant process your request right now, please try again later ...")
+		return HttpResponse(errorMessage1)
 
 
 # Function that returns calories data on a given time interval.
@@ -145,9 +146,9 @@ def get_calories(token,startTimeNanos,endTimeNanos, boo):
 		else:
 			return totalCalories
 	except KeyError:
-		return HttpResponse("Invalid Data Format. Potential empty googleFit Account")
+		return HttpResponse(errorMessage2)
 	except:
-		return HttpResponse("We cant process your request right now, please try again later ...")
+		return HttpResponse(errorMessage1)
 
 	
 # Function that returns location data on a given time interval.
@@ -189,9 +190,9 @@ def get_location(token,startTimeNanos,endTimeNanos):
 		return data
 		
 	except KeyError:
-		return HttpResponse("Invalid Data Format. Potential empty googleFit Account")
+		return HttpResponse(errorMessage2)
 	except:
-		return HttpResponse("We cant process your request right now, please try again later ...")
+		return HttpResponse(errorMessage1)
 
 	
 
@@ -204,7 +205,6 @@ def get_location(token,startTimeNanos,endTimeNanos):
 # @boo : boolean parameter - True to return the dataset to be plotted - False for total distance only
 def get_detailed_distance(token,startTimeNanos,endTimeNanos, boo):
 	try:
-		session_params  = {'access_token' : token  }
 
 		# Set parameters for request
 		datasetId = str(startTimeNanos) + "-" + str(endTimeNanos)
@@ -213,7 +213,9 @@ def get_detailed_distance(token,startTimeNanos,endTimeNanos, boo):
 		dataSourceId = "derived:com.google.distance.delta:com.google.android.gms:merge_distance_delta"
 		options = {'userId': 'me' , 'dataSourceId': dataSourceId , 'datasetId': datasetId }
 		url = "https://www.googleapis.com/fitness/v1/users/{userId}/dataSources/{dataSourceId}/datasets/{datasetId}".format(**options)
-
+		
+		session_params  = {'access_token' : token }
+		
 		r = requests.get(url, params = session_params )
 		data = r.json()["point"]
 
@@ -231,9 +233,9 @@ def get_detailed_distance(token,startTimeNanos,endTimeNanos, boo):
 		else:
 			return totalDistance
 	except KeyError:
-		return HttpResponse("Invalid Data Format. Potential empty googleFit Account")
+		return HttpResponse(errorMessage2)
 	except:
-		return HttpResponse("We cant process your request right now, please try again later ...")
+		return HttpResponse(errorMessage1)
 
 # Function that returns speed data on a given time interval - incomplete.
 # @request
@@ -241,7 +243,7 @@ def get_detailed_distance(token,startTimeNanos,endTimeNanos, boo):
 # @boo : boolean parameter - True to return the dataset to be plotted - False for average distance only
 def get_detailed_speed(token,startTimeNanos,endTimeNanos, boo):
 	try:
-
+		
 		# Set parameters for request
 		datasetId = str(startTimeNanos) + "-" + str(endTimeNanos)
 
@@ -250,6 +252,8 @@ def get_detailed_speed(token,startTimeNanos,endTimeNanos, boo):
 		options = {'userId': 'me' , 'dataSourceId': dataSourceId , 'datasetId': datasetId }
 		url = "https://www.googleapis.com/fitness/v1/users/{userId}/dataSources/{dataSourceId}/datasets/{datasetId}".format(**options)
 
+		session_params  = {'access_token' : token }
+		
 		if boo is True:
 			r = requests.get(url, params = session_params )
 			data = r.json()["point"]
@@ -265,79 +269,80 @@ def get_detailed_speed(token,startTimeNanos,endTimeNanos, boo):
 		else:
 			return avgspeed
 	except KeyError:
-		return HttpResponse("Invalid Data Format. Potential empty googleFit Account")
+		return HttpResponse(errorMessage2)
 	except:
-		return HttpResponse("We cant process your request right now, please try again later ...")
-	session_params  = {'access_token' : token  }
+		return HttpResponse(errorMessage1)
 
 
-# Function that gives the information required to create the session page for the user (plot_data and summary). 
+	
+
+# Function that gives the information required to create the session/workout page for the user (plot_data and summary). 
 # The query from front end should include starttime and endtime in milliseconds
-# we will need to convert them in nanoseconds.
-def get_session_details(request):
-
-	oauthAccessToken = signer.unsign(request.COOKIES.get("ACCESSTOKEN"))
-	# oauthAccessToken = "ya29.WgK0DSor04y7F7phLwE4DOzE_Pwmuvr_0sAnl9QXQcf0WQ7DG_PwU0YZCl7CQ9bNyppm"
-	
-	
-	# hardcoded times - we need them from the front end from users choice !!!
-	startTime = 1448983095955
-	endTime = 1548987127050
-
-	# Start-End times in epoch nanoseconds time format
-	endTimeNanos = millis_converter_nanos(endTime)
-	startTimeNanos = millis_converter_nanos(startTime)
-	
-	# datasetId = str(startTimeNanos) + "-" + str(endTimeNanos)
-	
-		
-	# create deliverables
-	# 0 item in list is total distance
-	# 1 item in list is data dictionary
-	speed = get_detailed_speed(oauthAccessToken, startTimeNanos, endTimeNanos, True)
-	calories = get_calories(oauthAccessToken, startTimeNanos, endTimeNanos, True)
-	
-	average = str({'avgspeed': round(speed[0],4), 'totalcalories': round(calories[0],2)})
-	data = str(list([speed[1], calories[1]]))
-	
-	return HttpResponse([average, data])
-	
-# ...
+# --------------> needs to be implemented !!
+# which we will need to convert them in nanoseconds.
 def workout(request):
 
 # def workout(request, startTime, endTime):
 # ?startTime=1448983095955&endTime=1548987127050
 # adding the above did not give the values to the script - how to give them?
-	
-	oauthAccessToken = signer.unsign(request.COOKIES.get("ACCESSTOKEN"))
-	# oauthAccessToken = "ya29.WgK0DSor04y7F7phLwE4DOzE_Pwmuvr_0sAnl9QXQcf0WQ7DG_PwU0YZCl7CQ9bNyppm"
-	
-	
-	# startTime = request.GET["startTime"]
-	# endTime = request.GET["endTime"]
-	
-	# hardcoded times - we need them from the front end from users choice !!!
-	startTime = 1448983095955
-	endTime = 1548987127050
-	# ?startTime=1448983095955&endTime=1548987127050
 
-	# Start - End times in epoch nanoseconds time format
-	endTimeNanos = millis_converter_nanos(endTime)
-	startTimeNanos = millis_converter_nanos(startTime)
+	try:
 	
-	logging.info(endTimeNanos)
-	logging.info(startTimeNanos)
-	
-	# datasetId = str(startTimeNanos) + "-" + str(endTimeNanos)
-	
+		oauthAccessToken = signer.unsign(request.COOKIES.get("ACCESSTOKEN"))
+		# oauthAccessToken = "ya29.WgK0DSor04y7F7phLwE4DOzE_Pwmuvr_0sAnl9QXQcf0WQ7DG_PwU0YZCl7CQ9bNyppm"
 		
-	# create deliverables
-	# 0 item in list is total distance
-	# 1 item in list is data dictionary
-	# speed = get_detailed_speed(oauthAccessToken, startTimeNanos, endTimeNanos, True)
-	location = str(get_location(oauthAccessToken, startTimeNanos, endTimeNanos))
+		
+		# startTime = request.GET["startTime"]
+		# endTime = request.GET["endTime"]
+		
+		# hardcoded times - we need them from the front end from users choice !!!
+		startTime = 1448983095955
+		endTime = 1548987127050
+		# ?startTime=1448983095955&endTime=1548987127050
+
+		# Start - End times in epoch nanoseconds time format
+		endTimeNanos = millis_converter_nanos(endTime)
+		startTimeNanos = millis_converter_nanos(startTime)
+		
+		logging.info(endTimeNanos)
+		logging.info(startTimeNanos)
+		
+		# datasetId = str(startTimeNanos) + "-" + str(endTimeNanos)
+		
+			
+		# create deliverables
+		
+		# 0 item in list is total distance
+		# 1 item in list is data dictionary
+		
+		speed = get_detailed_speed(oauthAccessToken, startTimeNanos, endTimeNanos, True)
+		calories = get_calories(oauthAccessToken, startTimeNanos, endTimeNanos, True)
+		
+		# only data no total/average here
+		location = str(get_location(oauthAccessToken, startTimeNanos, endTimeNanos))
+			
+		
+		average = str({'avgspeed': round(speed[0],4), 'totalcalories': round(calories[0],2)})
+
+		
+		data = []
+		data.append(speed[1])
+		data.append(calories[1])
+		data.append(location)
+		data = str(data)
+		
+		return HttpResponse([average, data])
+	except:
+		return HttpResponse(errorMessage1)
 	
-	# average = str({'avgspeed': round(speed[0],4), 'totalcalories': round(calories[0],2)})
-	# data = str(list([speed[1], calories[1]]))
-	
-	return HttpResponse(location)
+"""
+Documentation for front end:
+Workout Page:
+Results are a list
+[0] is for workout summary
+[1] is for detailed data to plot_data
+
+[1][0] is for speed data    > spoken with Sandeep about format
+[1][1] is for calories data > spoken with Sandeep about format
+[1][2] is for location data > in format Manos wants them to plot map route
+"""
