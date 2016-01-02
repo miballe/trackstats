@@ -20,7 +20,7 @@ EPOCH_START = datetime.datetime.utcfromtimestamp(0)
 signer = Signer('secretKey')
 
 errorMessage1 = "We cant process your request right now, please try again later."
-errorMessage2 = "Invalid Data Format. Potentially missing Google Fit data."
+#errorMessage2 = "Invalid Data Format. Potentially missing Google Fit data."
 
 # Converts time ...
 def timestamp_converter_nanos(date_time):
@@ -66,6 +66,7 @@ def dashboard(request):
 # @request
 # @sTime,eTime - strings from timestamps (in proper format!)
 # @boo : boolean parameter - True to return sessions dataset - False for total session number only
+# default return value is zero and empty set
 def get_sessions(token,sTime,eTime, boo):
 	try:
 		session_params  = {'startTime':sTime , 'endTime': eTime , 'access_token' : token  }
@@ -82,7 +83,10 @@ def get_sessions(token,sTime,eTime, boo):
 			return len(sessions)
 
 	except KeyError:
-		return HttpResponse(errorMessage2)
+		if boo is True:
+			return [0, []]
+		else:
+			return 0
 	except:
 		return HttpResponse(errorMessage1)
 
@@ -110,7 +114,7 @@ def get_weight(token,startTimeNanos,endTimeNanos):
 
 		return weight
 	except KeyError:
-		return HttpResponse(errorMessage2)
+		return 0
 	except:
 		return HttpResponse(errorMessage1)
 
@@ -146,7 +150,10 @@ def get_calories(token,startTimeNanos,endTimeNanos, boo):
 		else:
 			return totalCalories
 	except KeyError:
-		return HttpResponse(errorMessage2)
+		if boo is True:
+			return [0, []]
+		else:
+			return 0
 	except:
 		return HttpResponse(errorMessage1)
 
@@ -190,7 +197,7 @@ def get_location(token,startTimeNanos,endTimeNanos):
 		return data
 		
 	except KeyError:
-		return HttpResponse(errorMessage2)
+		return []
 	except:
 		return HttpResponse(errorMessage1)
 
@@ -233,7 +240,10 @@ def get_detailed_distance(token,startTimeNanos,endTimeNanos, boo):
 		else:
 			return totalDistance
 	except KeyError:
-		return HttpResponse(errorMessage2)
+		if boo is True:
+			return [0, []]
+		else:
+			return 0
 	except:
 		return HttpResponse(errorMessage1)
 
@@ -269,7 +279,11 @@ def get_detailed_speed(token,startTimeNanos,endTimeNanos, boo):
 		else:
 			return avgspeed
 	except KeyError:
-		return HttpResponse(errorMessage2)
+		if boo is True:
+			return [0, []]
+
+		else:
+			return 0
 	except:
 		return HttpResponse(errorMessage1)
 
@@ -350,7 +364,6 @@ Workout Page:
 Results are a list
 [0] is for workout summary
 [1] is for detailed data to plot_data
-
 [1][0] is for speed data    > spoken with Sandeep about format
 [1][1] is for calories data > spoken with Sandeep about format
 [1][2] is for location data > in format Manos wants them to plot map route
