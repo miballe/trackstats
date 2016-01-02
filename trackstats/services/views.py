@@ -19,7 +19,7 @@ EPOCH_START = datetime.datetime.utcfromtimestamp(0)
 
 signer = Signer('secretKey')
 
-errorMessage1 = "We cant process your request right now, please try again later."
+errorMessage1 = "We can't process your request right now, please try again later."
 #errorMessage2 = "Invalid Data Format. Potentially missing Google Fit data."
 
 # Converts time ...
@@ -352,7 +352,16 @@ def workout(request):
 		data.append(location)
 		data = str(data)
 		
-		return HttpResponse([average, data])
+		response_pre = "[{average}, {data}]"
+		data_options = {"average" : average, "data" : data}
+		response = response_pre.format(**data_options)
+		
+		return HttpResponse(response)
+		
+		# HttpResponse alternatives:
+		# return HttpResponse(str([average, data]))
+		# return HttpResponse([average, data])
+		# care that the data is formatted and returned in a format that it's structure is identifiable and therefore readable.
 	except:
 		return HttpResponse(errorMessage1)
 
