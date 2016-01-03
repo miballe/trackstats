@@ -366,7 +366,7 @@ def workout(request):
 		calories = get_calories(oauthAccessToken, startTimeNanos, endTimeNanos, True)
 
 		# only data no total/average here
-		location = str(get_location(oauthAccessToken, startTimeNanos, endTimeNanos))
+		location = get_location(oauthAccessToken, startTimeNanos, endTimeNanos)
 
 		average = {'avgspeed': round(speed[0],4), 'totalcalories': round(calories[0],2)}
 

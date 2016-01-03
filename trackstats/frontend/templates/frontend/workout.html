@@ -30,8 +30,23 @@
 		
 		</head>
 		<body>
-		
-		
+        <script>
+            function getJSON(s) {
+                var txt = document.createElement("textarea");
+                txt.innerHTML = s;
+                return JSON.parse(txt.value.replace(/u'/g, "'").replace(/'/g, '"'))
+            }
+            $.ajaxSetup({
+                async: false
+            });
+            DATA = $.getJSON("/sample_data/workout.html")["responseText"];
+            $.ajaxSetup({
+                async: true
+            });
+
+            var mapDetail = getJSON(DATA)[1][2];
+
+        </script>
 		<nav class="navbar horizontal-menu navbar-fixed-top navbar-minimal"><!-- set fixed position by adding class "navbar-fixed-top" -->
 		
 		<div class="navbar-inner">
@@ -316,16 +331,7 @@
 		}).addTo(map);
 
 
-	var polyline = L.polyline([
-		[50.934578, -1.396476],
-		[50.929284, -1.394833],
-		[50.926999, -1.390816],
-		[50.923596, -1.394963],
-		[50.920915, -1.404823],
-		[50.928265, -1.405684],
-		[50.932326, -1.402371],
-		[50.929284, -1.394807],
-		],
+	var polyline = L.polyline(mapDetail,
 		{
 			color: 'blue',
 			weight: 10,
