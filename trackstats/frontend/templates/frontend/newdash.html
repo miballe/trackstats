@@ -58,7 +58,7 @@
                     }
                 }
 
-                event[newFormat] = {"number": act};
+                event[newFormat] = {"number": act,"url": "/pages/workout?start="+json['sessions'][ses]['startTimeMillis']+"&"+"end="+json['sessions'][ses]['endTimeMillis']};
             }
             var caldata = Object();
             caldata.time = d.getFullYear() + '-' + pad(d.getMonth() + 1);

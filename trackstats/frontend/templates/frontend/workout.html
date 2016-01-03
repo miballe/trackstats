@@ -36,6 +36,19 @@
                 txt.innerHTML = s;
                 return JSON.parse(txt.value.replace(/u'/g, "'").replace(/'/g, '"'))
             }
+            function getParameterByName(name) {
+                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                        results = regex.exec(location.search);
+                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+            var startTime1 = getParameterByName("start");
+            var endTime1 = getParameterByName("end");
+            var startTime2 = getParameterByName("start2");
+            var endTime2 = getParameterByName("end2");
+
+            console.log(startTime1);
+            console.log(endTime1);
             $.ajaxSetup({
                 async: false
             });
