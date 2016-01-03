@@ -55,4 +55,4 @@ def workout(request):
 
     
 
-    return render(request, 'frontend/workout.html',{"username": user["name"],"userimg": user["picture"], "dashboardData": dashboardData})
+    return render(request, 'frontend/workout.html',{"username": user["name"],"userimg": user["picture"]})#, "dashboardData": dashboardData})
