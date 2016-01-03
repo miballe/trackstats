@@ -13,17 +13,23 @@ import logging
 
 
 credentials_dir = os.path.join(os.path.dirname(__file__), '../ClientIDSecret.json')
+
+#defining the scopes that we need for the application
+
 ACT_READ = "https://www.googleapis.com/auth/fitness.activity.read"
 LOC_READ = "https://www.googleapis.com/auth/fitness.location.read"
 BODY_READ = "https://www.googleapis.com/auth/fitness.body.read"
 PROFILE = "https://www.googleapis.com/auth/userinfo.profile"
+
+#getting the client id and secret from the json file
 with open(credentials_dir, mode = 'r') as cred:
 	data = json.load(cred)
 	CLIENT_ID = data["web"]["client_id"]
 	CLIENT_SECRET = data["web"]["client_secret"]
 
-# Create your views here.
+
 def login(request):
+    #getting the authorization code
     token_request_uri = "https://accounts.google.com/o/oauth2/auth"
     response_type = "code"
     client_id = CLIENT_ID
@@ -42,7 +48,7 @@ def login(request):
 
 
 def auth(request):
-
+    #getting the access token
     parser = Http()
     login_failed_url = '/'
     authcode = request.GET['code']
@@ -65,6 +71,7 @@ def auth(request):
         content = json.loads(content)
         tokendata = content['access_token']
         logging.info('ORIGINAL TOKEN - ' + tokendata)
+        #checks if redirection is needed
         redirection = request.COOKIES.get('REDIRECTION')
         if redirection:
             response = HttpResponseRedirect(redirection)
@@ -72,6 +79,7 @@ def auth(request):
         else:
             response = HttpResponseRedirect('/pages/dashboard')
 
+        #encrypting the cookies
         signer = Signer('secretKey')
         encryptedToken = signer.sign(tokendata)
         logging.info('ENCRYPTED TOKEN - ' + encryptedToken)
@@ -83,6 +91,7 @@ def auth(request):
         return HttpResponseRedirect('/')
 
 def logout(request):
+    #deleting cookies ...
     parser = Http()
     ACCESSTOKEN = request.COOKIES.get("ACCESSTOKEN")
     response = HttpResponseRedirect('/')
