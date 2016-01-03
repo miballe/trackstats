@@ -30,8 +30,8 @@
 	}
 
 body {
-	width: 1280px;
-  height: 720px;
+	width: 100%;
+  height: auto;
 	background-color: #F5F5F5;
 }
 
