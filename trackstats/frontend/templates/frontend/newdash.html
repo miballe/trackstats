@@ -25,18 +25,44 @@
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 
-<script>
+    <script>
+        function pad(d) {
+            return (d < 10) ? '0' + d.toString() : d.toString();
+        }
 
-    function getJSON(s){
-        var txt = document.createElement("textarea");
-        txt.innerHTML = s;
-        return JSON.parse(txt.value.replace(/u'/g,"'").replace(/'/g,'"'))
-    }
-	var dashboardDetail = "{{ dashboardData }}" ;
-    var DATA = getJSON(dashboardDetail);
+        function getJSON(s) {
+            var txt = document.createElement("textarea");
+            txt.innerHTML = s;
+            return JSON.parse(txt.value.replace(/u'/g, "'").replace(/'/g, '"'))
+        }
+        function createCalendarData(json) {
+            $.getJSON("/sample_data/ActivityTypes.json", function (json) {
+                console.log(json); // this will show the info it in firebug console
+            });
+            var d = new Date();
+            var event = {};
+            for (ses in DATA["sessions"]) {
+                var normalDate = new Date(parseInt(DATA['sessions'][ses]['startTimeMillis']));
+                var newFormat = normalDate.getFullYear().toString() + '-' + pad(normalDate.getMonth() + 1).toString() + '-' + pad(normalDate.getDate()).toString();
+                event[newFormat] = {"number": DATA['sessions'][ses]["activityType"]}
+
+            }
+            var caldata = Object();
+            caldata.time = d.getFullYear() + '-' + pad(d.getMonth() + 1);
+            caldata.events = event;
+
+            console.log(caldata);
+            return caldata
+
+        }
+
+        var dashboardDetail = "{{ dashboardData }}";
+        var DATA = getJSON(dashboardDetail);
+        var DATACALENDAR = createCalendarData(DATA);
+        console.log(DATA);
 
 
-</script>
+    </script>
 	
 </head>
 <body class="page-body">

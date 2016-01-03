@@ -24,6 +24,9 @@ handlers:
 - url: /assets
   static_dir: static/assets
 
+- url: /sample_data
+  static_dir: sample_data
+
 builtins:
 - django_wsgi: on
   
