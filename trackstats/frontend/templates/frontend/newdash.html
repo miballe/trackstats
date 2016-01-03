@@ -26,6 +26,7 @@
 	<![endif]-->
 
     <script>
+
         function pad(d) {
             return (d < 10) ? '0' + d.toString() : d.toString();
         }
@@ -35,24 +36,36 @@
             txt.innerHTML = s;
             return JSON.parse(txt.value.replace(/u'/g, "'").replace(/'/g, '"'))
         }
+
         function createCalendarData(json) {
-            $.getJSON("/sample_data/ActivityTypes.json", function (json) {
-                console.log(json); // this will show the info it in firebug console
-            });
+
             var d = new Date();
             var event = {};
-            for (ses in DATA["sessions"]) {
-                var normalDate = new Date(parseInt(DATA['sessions'][ses]['startTimeMillis']));
+            for (ses in json["sessions"]) {
+                var normalDate = new Date(parseInt(json['sessions'][ses]['startTimeMillis']));
                 var newFormat = normalDate.getFullYear().toString() + '-' + pad(normalDate.getMonth() + 1).toString() + '-' + pad(normalDate.getDate()).toString();
-                event[newFormat] = {"number": DATA['sessions'][ses]["activityType"]}
+                $.ajaxSetup({
+                    async: false
+                });
+                var activites = $.getJSON("/sample_data/ActivityTypes.json")["responseJSON"];
+                $.ajaxSetup({
+                    async: true
+                });
+                var act = "Undefined"
+                for (a in activites){
+                    if( activites[a]["ID"] == json['sessions'][ses]['activityType']){
+                        act = activites[a]["ACTIVITY"];
+                    }
+                }
 
+                event[newFormat] = {"number": act};
             }
             var caldata = Object();
             caldata.time = d.getFullYear() + '-' + pad(d.getMonth() + 1);
             caldata.events = event;
 
             console.log(caldata);
-            return caldata
+            return caldata;
 
         }
 
