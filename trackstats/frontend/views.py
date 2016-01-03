@@ -36,3 +36,23 @@ def dashboard(request):
     dashboardData = content
 
     return render(request, 'frontend/newdash.html',{"username": user["name"],"userimg": user["picture"], "dashboardData": dashboardData})
+    
+def workout(request):
+        
+    parser = Http()
+    signer = Signer('secretKey')
+    ACCESS_TOKEN = request.COOKIES.get("ACCESSTOKEN")
+    if ACCESS_TOKEN:
+        accesstoken = signer.unsign(ACCESS_TOKEN)
+
+    logging.info('DECRYPTED TOKEN - ' + accesstoken)
+
+    resp, content = parser.request("https://www.googleapis.com/oauth2/v1/userinfo?access_token={accessToken}".format(accessToken= accesstoken))
+
+    logging.info(content)
+    user = json.loads(content)
+    logging.info(user)
+
+    
+
+    return render(request, 'frontend/workout.html',{"username": user["name"],"userimg": user["picture"], "dashboardData": dashboardData})
