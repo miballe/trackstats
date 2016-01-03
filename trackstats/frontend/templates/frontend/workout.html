@@ -52,7 +52,8 @@
             $.ajaxSetup({
                 async: false
             });
-            DATA = $.getJSON("/sample_data/workout.html")["responseText"];
+            <!-- DATA = $.getJSON("/sample_data/workout.html")["responseText"]; -->
+			DATA = $.getJSON("/services/workout?startTime=" + startTime1 + "&endTime=" + endTime1 )["responseText"];
             $.ajaxSetup({
                 async: true
             });

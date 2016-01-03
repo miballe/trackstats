@@ -337,7 +337,8 @@ def workout(request):
 		# Fixed Time issue input
 		# times are given within the get request
 		# example url for previously hardcoded times is:
-		# ?startTime=1448983095955&endTime=1548987127050
+		# ?startTime=1451493869506&endTime=1451494113312
+		# ?startTime=1451494137234&endTime=1451494830941
 		startTime = request.GET["startTime"]
 		endTime = request.GET["endTime"]
 
