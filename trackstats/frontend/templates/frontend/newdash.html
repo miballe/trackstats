@@ -41,19 +41,19 @@
 
             var d = new Date();
             var event = {};
+            $.ajaxSetup({
+                async: false
+            });
+            var activites = $.getJSON("/sample_data/ActivityTypes.json")["responseJSON"];
+            $.ajaxSetup({
+                async: true
+            });
             for (ses in json["sessions"]) {
                 var normalDate = new Date(parseInt(json['sessions'][ses]['startTimeMillis']));
                 var newFormat = normalDate.getFullYear().toString() + '-' + pad(normalDate.getMonth() + 1).toString() + '-' + pad(normalDate.getDate()).toString();
-                $.ajaxSetup({
-                    async: false
-                });
-                var activites = $.getJSON("/sample_data/ActivityTypes.json")["responseJSON"];
-                $.ajaxSetup({
-                    async: true
-                });
                 var act = "Undefined"
-                for (a in activites){
-                    if( activites[a]["ID"] == json['sessions'][ses]['activityType']){
+                for (a in activites) {
+                    if (activites[a]["ID"] == json['sessions'][ses]['activityType']) {
                         act = activites[a]["ACTIVITY"];
                     }
                 }
@@ -68,15 +68,24 @@
             return caldata;
 
         }
+         $.ajaxSetup({
+            async: false
+        });
 
-        var dashboardDetail = "{{ dashboardData }}";
+         var dashboardDetail =  $.getJSON("/services/dashboard")["responseText"];
+
+        $.ajaxSetup({
+            async: true
+        });
+
         var DATA = getJSON(dashboardDetail);
+
         var DATACALENDAR = createCalendarData(DATA);
-        console.log(DATA);
+
 
 
     </script>
-	
+
 </head>
 <body class="page-body">
 

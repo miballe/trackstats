@@ -4,6 +4,9 @@ from django.core import signing
 from django.http import HttpResponse
 from django.http import HttpRequest
 from django.http import HttpResponseRedirect
+from google.appengine.api import urlfetch
+
+urlfetch.set_default_fetch_deadline(60)
 
 import logging
 from httplib2 import Http
@@ -31,11 +34,7 @@ def dashboard(request):
     user = json.loads(content)
     logging.info(user)
 
-    resp, content = parser.request("http://localhost:8080/services/dashboard",headers={'Cookie':"ACCESSTOKEN="+ACCESS_TOKEN})
-
-    dashboardData = content
-
-    return render(request, 'frontend/newdash.html',{"username": user["name"],"userimg": user["picture"], "dashboardData": dashboardData})
+    return render(request, 'frontend/newdash.html',{"username": user["name"],"userimg": user["picture"]})
     
 def workout(request):
         
@@ -53,6 +52,6 @@ def workout(request):
     user = json.loads(content)
     logging.info(user)
 
-    
+
 
     return render(request, 'frontend/workout.html',{"username": user["name"],"userimg": user["picture"]})#, "dashboardData": dashboardData})
