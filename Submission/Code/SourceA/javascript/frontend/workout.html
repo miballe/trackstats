@@ -1,0 +1,199 @@
+
+		    <script>
+				function getJSON(s) {
+					var txt = document.createElement("textarea");
+					txt.innerHTML = s;
+					return JSON.parse(txt.value.replace(/u'/g, "'").replace(/'/g, '"'))
+				}
+				function getParameterByName(name) {
+					name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+					var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+						results = regex.exec(location.search);
+				return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+				}
+				var startTime1 = getParameterByName("start");
+				var endTime1 = getParameterByName("end");
+				$.ajaxSetup({
+					async: false
+				});
+				<!-- DATA = $.getJSON("/sample_data/workout.html")["responseText"]; -->
+				DATA = $.getJSON("/services/workout?startTime=" + startTime1 + "&endTime=" + endTime1 )["responseText"];
+				$.ajaxSetup({
+					async: true
+				});
+
+				var mapDetail = getJSON(DATA)[1][2];
+				var speedDetail = getJSON(DATA)[1][0];
+				var calories = getJSON(DATA)[1][1];
+				
+				console.log(mapDetail[0]);
+				console.log(speedDetail[0].value[0]);
+
+								function signOut() {
+
+									window.location = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080/usr/login";
+								}
+
+	
+	if(mapDetail.length>0){
+	var map = L.map('map').setView(mapDetail[0], 12);
+	mapLink = 
+		'<a href="http://openstreetmap.org">OpenStreetMap</a>';
+	L.tileLayer(
+		'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; ' + mapLink + ' Contributors',
+		maxZoom: 28,
+		}).addTo(map);
+
+
+	var polyline = L.polyline(mapDetail,
+		{
+			color: 'blue',
+			weight: 10,
+			opacity: .7,
+			dashArray: '20,15',
+			lineJoin: 'round'
+		}
+		).addTo(map);
+	 }
+	 else{
+	 
+	 var map = L.map('map').setView([50.93776321411133, -1.398274540901184], 12);
+	mapLink = 
+		'<a href="http://openstreetmap.org">OpenStreetMap</a>';
+	L.tileLayer(
+		'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; ' + mapLink + ' Contributors',
+		maxZoom: 28,
+		}).addTo(map);
+
+
+	var polyline = L.polyline(mapDetail,
+		{
+			color: 'blue',
+			weight: 10,
+			opacity: .7,
+			dashArray: '20,15',
+			lineJoin: 'round'
+		}
+		).addTo(map);
+	 
+	 }
+		
+		var startTime=[];
+		var endTime = [];
+		var totalTime = ['x']; 
+		var speed = ['speed'];
+		var calorie = ['calories'];
+		var tmp1 = [];
+		var tmp2 = [];
+	
+		function time_values()	{
+			
+			for (var i = 0;i<speedDetail.length;i++)// Traversing the whole json file to get the data
+				{
+				
+					startTime[i] = parseInt(speedDetail[i].startTimeNanos)/1000000;
+					
+					endTime[i] = parseInt(speedDetail[i].endTimeNanos)/1000000;
+					
+				 	var eg = new Date(startTime[0]);
+					
+					var eg1 = new Date(endTime[i]);
+					
+					var hr = eg.getHours();
+					var mnts  = eg.getMinutes();
+					var scnds  = eg.getSeconds();
+					
+					var hr1  = eg1.getHours();
+					var mnts1  = eg1.getMinutes();
+					var scnds1  = eg1.getSeconds();
+					
+					tmp1[i] = scnds+(mnts + (hr*60))*60;
+					tmp2[i] = scnds1+(mnts1+(hr1*60))*60;
+					
+					totalTime[i+1] = Math.round((tmp2[i]/60) - (tmp1[i]/60));
+				}	
+				
+			
+			return totalTime;
+		};
+			 
+			 
+		function speed_values(){
+			for (var i = 0;i<speedDetail.length;i++){
+			speed[i+1] = parseInt(speedDetail[i].value[0].fpVal);
+			}
+			
+		  return speed;
+		};	 
+		
+		function calorie_values(){
+			for (var i = 0;i<calories.length;i++){
+			
+			calorie[i+1] = parseInt(calories[i].value[0].fpVal);
+			}
+			
+		  return calorie;
+		};	 
+			 
+			console.log(time_values());
+			console.log(speed_values());
+			console.log(calorie_values());
+				
+		
+		
+		if(speed_values().length>1){	
+			var chart = c3.generate({
+				bindto: '#chart1',
+				data: {
+						x: 'x',
+						columns: [
+						time_values(),
+						speed_values()
+						
+					]
+				},
+				axis:{
+					
+					y:{
+						
+						label:'Speed (m/s)'
+					
+					},
+					x:{
+					
+						label: 'Time (min)'
+					
+					}
+				
+				
+				}
+			});
+		}
+		
+		if(calorie_values().length>1){
+			var chart = c3.generate({
+				bindto: '#chart2',
+				data: {
+						x: 'x',
+						columns: [
+						time_values(),
+						calorie_values()
+					]
+				},
+			axis:{
+				
+				y:{
+					
+					label:'Calories (kCal)'
+				
+				},
+				x:{
+				
+					label: 'Time (min)'
+				
+				}
+			}
+		});}
+			

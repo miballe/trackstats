@@ -33,7 +33,7 @@ def login(request):
     token_request_uri = "https://accounts.google.com/o/oauth2/auth"
     response_type = "code"
     client_id = CLIENT_ID
-    redirect_uri = "http://localhost:8080/usr/loginac/"
+    redirect_uri = "http://trackstatsk.appspot.com/usr/loginac/"
     scope = ACT_READ+' '+LOC_READ+' '+BODY_READ+' '+PROFILE
     url = "{token_request_uri}?response_type={response_type}&client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}".format(
             token_request_uri=token_request_uri,
@@ -59,7 +59,7 @@ def auth(request):
 
         params = urllib.urlencode({
             'code': authcode,
-            'redirect_uri': "http://localhost:8080/usr/loginac/",
+            'redirect_uri': "http://trackstatsk.appspot.com/usr/loginac/",
             'client_id': "1047651366452-32ph4ndul3s5caub46t3nbue3p5e5uha",
             'client_secret': "PNwEP-rCdeP8rBreZ8oWjUle",
             'grant_type': 'authorization_code'
