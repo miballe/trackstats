@@ -51,12 +51,14 @@ def dashboard(request):
 
 		logging.info('[Services][Dashboard][StartTime] StartNanos: %d, EndNanos: %d', startTimeNanos, endTimeNanos)
 
+		epochStartTime = EPOCH_START.strftime('%Y-%m-%dT%H:%M:%S.00Z')
 		# Get summary data about last month for dashboard
-		weight = get_weight(oauthAccessToken, timestamp_converter_nanos(EPOCH_START.strftime('%Y-%m-%dT%H:%M:%S.00Z')), endTimeNanos)
+		weight = get_weight(oauthAccessToken, timestamp_converter_nanos(epochStartTime), endTimeNanos)
 		calories = get_calories(oauthAccessToken ,startTimeNanos, endTimeNanos, False)
 		distance = get_detailed_distance(oauthAccessToken, startTimeNanos, endTimeNanos, False)
-		ses_all = get_sessions(oauthAccessToken,startTime,endTime, True)
-		nSessions = ses_all[0]
+		sesLastMonth = get_sessions(oauthAccessToken,startTime,endTime, False)
+		nSessions = sesLastMonth
+		ses_all = get_sessions(oauthAccessToken,epochStartTime,endTime, True)
 		sessionData = ses_all[1]
 
 		dashboardSummary = {"calories": round(calories,2), "distance": round(distance,2), "nsessions": nSessions, "weight": weight, "sessions": sessionData}
