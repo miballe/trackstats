@@ -73,9 +73,7 @@
 					<img src="/assets/images/TrackStats.png" width="80" alt="" class="hidden-xs" />
 					<img src="/assets/images/TrackStats.png" width="80" alt="" class="visible-xs" />
 				</a>
-				<a href="#" data-toggle="settings-pane" data-animate="true">
-					<i class="linecons-cog"></i>
-				</a>
+				
 			</div>
 				
 			<!-- Mobile Toggles Links -->
@@ -115,158 +113,13 @@
 						<i class="linecons-cog"></i>
 						<span class="title">Dashboard</span>
 					</a>
-					</li>
-					
-					<li>
-					<a href="#">
-						<i class="linecons-desktop"></i>
-						<span class="title">Workouts</span>
-					</a>
-				
-						
 				</li>
 			</ul>
 					
 			
-			<!-- notifications and other links -->
+			<!-- Profile info -->
 			<ul class="nav nav-userinfo navbar-right">
 				
-				
-						
-					<ul class="dropdown-menu messages">
-					
-					<li>
-							
-						<ul class="dropdown-menu-list list-unstyled ps-scrollbar">
-						
-							<li class="active"><!-- "active" class means message is unread -->
-								<a href="#">
-									
-							
-						</ul>
-						
-					</li>
-					
-					<li class="external">
-						<a href="blank-sidebar.html">
-							<span>All Messages</span>
-							<i class="fa-link-ext"></i>
-						</a>
-					</li>
-					</ul>
-					
-				</li>
-				
-				<li class="dropdown xs-left">
-					<a href="#" data-toggle="dropdown" class="notification-icon notification-icon-messages">
-						<i class="fa-bell-o"></i>
-						<span class="badge badge-purple">7</span>
-					</a>
-						
-					<ul class="dropdown-menu notifications">
-										<li class="top">
-						<p class="small">
-							<a href="#" class="pull-right">Mark all Read</a>
-							You have <strong>3</strong> new notifications.
-						</p>
-					</li>
-					
-					<li>
-						<ul class="dropdown-menu-list list-unstyled ps-scrollbar">
-							<li class="active notification-success">
-								<a href="#">
-									<i class="fa-user"></i>
-									
-									<span class="line">
-										<strong>New user registered</strong>
-									</span>
-									
-									<span class="line small time">
-										30 seconds ago
-									</span>
-								</a>
-							</li>
-							
-							<li class="active notification-secondary">
-								<a href="#">
-									<i class="fa-lock"></i>
-									
-									<span class="line">
-										<strong>Privacy settings have been changed</strong>
-									</span>
-									
-									<span class="line small time">
-										3 hours ago
-									</span>
-								</a>
-							</li>
-							
-							<li class="notification-primary">
-								<a href="#">
-									<i class="fa-thumbs-up"></i>
-									
-									<span class="line">
-										<strong>Someone special liked this</strong>
-									</span>
-									
-									<span class="line small time">
-										2 minutes ago
-									</span>
-								</a>
-							</li>
-							
-							<li class="notification-danger">
-								<a href="#">
-									<i class="fa-calendar"></i>
-									
-									<span class="line">
-										John cancelled the event
-									</span>
-									
-									<span class="line small time">
-										9 hours ago
-									</span>
-								</a>
-							</li>
-							
-							<li class="notification-info">
-								<a href="#">
-									<i class="fa-database"></i>
-									
-									<span class="line">
-										The server is status is stable
-									</span>
-									
-									<span class="line small time">
-										yesterday at 10:30am
-									</span>
-								</a>
-							</li>
-							
-							<li class="notification-warning">
-								<a href="#">
-									<i class="fa-envelope-o"></i>
-									
-									<span class="line">
-										New comments waiting approval
-									</span>
-									
-									<span class="line small time">
-										last week
-									</span>
-								</a>
-							</li>
-						</ul>
-					</li>
-					
-					<li class="external">
-						<a href="#">
-							<span>View all notifications</span>
-							<i class="fa-link-ext"></i>
-						</a>
-					</li>
-					</ul>
-				</li>
 		
 				<li class="dropdown user-profile">
 					<a href="#" data-toggle="dropdown">
@@ -313,30 +166,64 @@
 		
 	</nav>
 	
-	<div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
+	<div class="page-container">
 			
 		<div class="main-content">
-		
-		</div>
-			
 			
 			
 			</br></br>
 			</br>
 			</br>
 			</br>		
+			<div id="map" style="width: 600px; height: 400px"></div>	
 			
-	<div id="map" style="width: 600px; height: 400px"></div>		
+			
+			<footer class="main-footer sticky footer-type-1">
+				
+				<div class="footer-inner">
+				
+					<!-- Add your copyright text here -->
+					<div class="footer-text">
+						&copy; 2015 
+						<strong>TrackStats</strong> 
+					</div>
+					
+					
+					<!-- Go to Top Link, just add rel="go-top" to any link to add this functionality -->
+					<div class="go-up">
+					
+						<a href="#" rel="go-top">
+							<i class="fa-angle-up"></i>
+						</a>
+						
+					</div>
+					
+				</div>
+				
+			</footer>
+		
+			
+		</div>
+			
+			
+			
+			
+		
+	</div>
+		
 
-</br></br>
-</br>
-</br>
-</br>
+	
 
-
-
-
-<script>
+</body>
+<!-- Bottom Scripts -->
+	<script src="/assets/js/bootstrap.min.js"></script>
+	<script src="/assets/js/TweenMax.min.js"></script>
+	<script src="/assets/js/resizeable.js"></script>
+	<script src="/assets/js/joinable.js"></script>
+	<script src="/assets/js/xenon-api.js"></script>
+	<script src="/assets/js/xenon-toggles.js"></script>
+	
+	<script>
 	var map = L.map('map').setView([50.900387, -1.394315], 12);
 	mapLink = 
 		'<a href="http://openstreetmap.org">OpenStreetMap</a>';
@@ -360,54 +247,6 @@
 </script>
 
 
-
-
-
-
-
-
-
-		
-<footer class="main-footer sticky footer-type-1">
-				
-				<div class="footer-inner">
-				
-					<!-- Add your copyright text here -->
-					<div class="footer-text">
-						&copy; 2015 
-						<strong>TrackStats</strong> 
-					</div>
-					
-					
-					<!-- Go to Top Link, just add rel="go-top" to any link to add this functionality -->
-					<div class="go-up">
-					
-						<a href="#" rel="go-top">
-							<i class="fa-angle-up"></i>
-						</a>
-						
-					</div>
-					
-				</div>
-				
-			</footer>
-		</div>
-		
-	
-				
-		
-	</div>
-	
-
-	<!-- Bottom Scripts -->
-	<script src="/assets/js/bootstrap.min.js"></script>
-	<script src="/assets/js/TweenMax.min.js"></script>
-	<script src="/assets/js/resizeable.js"></script>
-	<script src="/assets/js/joinable.js"></script>
-	<script src="/assets/js/xenon-api.js"></script>
-	<script src="/assets/js/xenon-toggles.js"></script>
-	
-	
 	
 	
 	
@@ -416,5 +255,5 @@
 	<!-- JavaScripts initializations and stuff -->
 	<script src="/assets/js/xenon-custom.js"></script>
 
-</body>
+
 </html>
