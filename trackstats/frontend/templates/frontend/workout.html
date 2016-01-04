@@ -32,10 +32,19 @@
 					txt.innerHTML = s;
 					return JSON.parse(txt.value.replace(/u'/g, "'").replace(/'/g, '"'))
 				}
+				function getParameterByName(name) {
+					name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+					var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+						results = regex.exec(location.search);
+				return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+				}
+				var startTime1 = getParameterByName("start");
+				var endTime1 = getParameterByName("end");
 				$.ajaxSetup({
 					async: false
 				});
-				DATA = $.getJSON("/sample_data/workout.html")["responseText"];
+				<!-- DATA = $.getJSON("/sample_data/workout.html")["responseText"]; -->
+				DATA = $.getJSON("/services/workout?startTime=" + startTime1 + "&endTime=" + endTime1 )["responseText"];
 				$.ajaxSetup({
 					async: true
 				});
@@ -44,7 +53,7 @@
 				var speedDetail = getJSON(DATA)[1][0];
 				var calories = getJSON(DATA)[1][1];
 				
-				console.log(calories[0].value[0]);
+				console.log(mapDetail[0]);
 				console.log(speedDetail[0].value[0]);
 
 			</script>
@@ -196,7 +205,7 @@
 	<script src="/assets/js/xenon-toggles.js"></script>
 	
 	<script>
-	var map = L.map('map').setView([50.900387, -1.394315], 12);
+	var map = L.map('map').setView(mapDetail[0], 12);
 	mapLink = 
 		'<a href="http://openstreetmap.org">OpenStreetMap</a>';
 	L.tileLayer(
