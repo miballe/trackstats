@@ -151,7 +151,7 @@
 	</nav>
 	
 	<div class="page-container">
-			
+		<h1>Work Out Detail</h1>	
 		<div class="main-content">
 				
 			<div id="map" style="width: 600px; height: 400px;margin-top:40;"></div>
@@ -207,6 +207,8 @@
 	<script src="/assets/js/xenon-toggles.js"></script>
 	
 	<script>
+	
+	if(mapDetail.length>0){
 	var map = L.map('map').setView(mapDetail[0], 12);
 	mapLink = 
 		'<a href="http://openstreetmap.org">OpenStreetMap</a>';
@@ -226,6 +228,30 @@
 			lineJoin: 'round'
 		}
 		).addTo(map);
+	 }
+	 else{
+	 
+	 var map = L.map('map').setView([50.93776321411133, -1.398274540901184], 12);
+	mapLink = 
+		'<a href="http://openstreetmap.org">OpenStreetMap</a>';
+	L.tileLayer(
+		'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; ' + mapLink + ' Contributors',
+		maxZoom: 28,
+		}).addTo(map);
+
+
+	var polyline = L.polyline(mapDetail,
+		{
+			color: 'blue',
+			weight: 10,
+			opacity: .7,
+			dashArray: '20,15',
+			lineJoin: 'round'
+		}
+		).addTo(map);
+	 
+	 }
 			
 </script>
 
@@ -297,7 +323,9 @@
 			console.log(speed_values());
 			console.log(calorie_values());
 				
-				
+		
+		
+		if(speed_values().length>1){	
 		var chart = c3.generate({
 			bindto: '#chart1',
 			data: {
@@ -309,7 +337,7 @@
 				]
 			}
 		});
-		
+		}
 		
 		if(calorie_values().length>1){
 			var chart = c3.generate({
