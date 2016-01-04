@@ -153,23 +153,10 @@
 						<img src="{{ userimg }}" alt="user-image" class="img-circle img-inline userpic-32" width="28" />
 						<span>
 							{{ username }}
-							<i class="fa-angle-down"></i>
 						</span>
 					</a>
 					
-					<ul class="dropdown-menu user-profile-menu list-unstyled">
-						<li>
-							<a href="#profile">
-								<i class="fa-user"></i>
-								Profile
-							</a>
-						</li>
-						<li>
-							<a href="#help">
-								<i class="fa-info"></i>
-								Help
-							</a>
-						</li>
+		
 						<li class="last">
 
 							<a href="#" onclick="signOut();">
@@ -198,34 +185,36 @@
 		<div class="main-content">
 					
 			
-				<div class="container">
-					<center><h2>Last Month Results</h2></center>
-					<center><p>Averages for the last month</p></center>
-					<center><table style="table-layout: auto"></center>
-						<thead>
-						</thead>
-						<tbody>
-						<tr>
-							<td><script>document.write(DATA["calories"])</script>
-								<br>
-								Calories burnt
-								<br>
-								<span class="glyphicon glyphicon-fire"</span></td>
-							<td><script>document.write(DATA["distance"])</script>
-								<br>
-								Distance Covered
-								<br>
-								<span class="glyphicon glyphicon-road"</span></td>
-							<td><script>document.write(DATA["nsessions"])</script>
-								<br>
-								Sessions
-								<br>
-								<span class="glyphicon glyphicon-time"</span></td>
+				<div class="wrap">
+<div class="table">
+<ul>
+  
+<li>
+  <div class="top">
+    <h1>Session</h1>
+    <div class="circle pink"><script>document.write(DATA["nsessions"])</script></div>
+  </div>
 
-						</tr>
-						</tbody>
-					</table>
-				</div>
+</li>
+  
+<li>
+  <div class="top">
+    <h1>Distance</h1>
+    <div class="circle pink"><script>document.write(DATA["distance"])</script></div>
+  </div>
+</li>
+  
+<li>
+  <div class="top">
+    <h1>Calories</h1>
+    <div class="circle pink"><script>document.write(DATA["calories"])</script></div>
+  </div>
+  
+</li>
+  
+</ul>
+</div>
+</div>
 
 
 				</br></br>

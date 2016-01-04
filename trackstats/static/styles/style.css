@@ -103,3 +103,78 @@ body {
     margin-top: -250px;
     font-size:10px;
  }
+ 
+ @import "compass/css3";
+
+* {
+  margin:0;
+  padding:0;
+}
+
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Droid+Serif:400,700);
+
+html, body {
+  height: 100%;
+}
+
+body {
+  text-align:center;
+
+  @include filter-gradient(#5d46a0, #f7eec7, vertical);
+  $experimental-support-for-svg: true;
+  @include background-image(linear-gradient(top, #5d4660    0%,#f7eec7 100%));
+  font-family: 'Droid Sans', sans-serif;
+}
+
+.wrap {
+  width:600px;
+  margin:0 auto;
+  text-align:left;
+}
+
+.table {
+  background-color:; 
+  height:125px;
+  width:100%;
+  margin-top:50px;  
+}
+
+ul li {
+  float:left;
+  width:199px;
+  text-align:center;
+  border-left:px solid #DDDCD8;
+  list-style:none;
+  
+}
+
+.top {
+  background-color:white;
+  height:75px;
+  h1 {
+    padding-top:20px;
+  }
+}
+
+.circle {
+  width:60px;
+  height:60px;
+  border-radius:60px;
+  font-size:20px;
+  color:#fff;
+  line-height:60px;
+  text-align:center;
+  background:#989A8F;
+  margin-left:70px;
+  margin-top:10px;
+}
+
+
+
+.white {
+ color:#FFFFFF; 
+}
+
+.pink {
+  background-color:#1d86c8;
+}
