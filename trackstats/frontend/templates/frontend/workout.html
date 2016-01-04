@@ -156,7 +156,9 @@
 				
 			<div id="map" style="width: 600px; height: 400px;margin-top:40;"></div>
 
-			<div id = 'chart12'></div>
+			<div id = 'chart1'></div>
+			
+			<div id = 'chart2'></div>
 			
 			
 			<footer class="main-footer sticky footer-type-1">
@@ -266,7 +268,7 @@
 					tmp1[i] = scnds+(mnts + (hr*60))*60;
 					tmp2[i] = scnds1+(mnts1+(hr1*60))*60;
 					
-					totalTime[i+1] = tmp2[i] - tmp1[i] ;
+					totalTime[i+1] = Math.round((tmp2[i]/60) - (tmp1[i]/60));
 				}	
 				
 			
@@ -297,16 +299,30 @@
 				
 				
 		var chart = c3.generate({
-			bindto: '#chart12',
+			bindto: '#chart1',
 			data: {
 					x: 'x',
 					columns: [
 					time_values(),
-					speed_values(),
-					calorie_values()
+					speed_values()
+					//calorie_values()
 				]
 			}
 		});
+		
+		
+		if(calorie_values().length>1){
+			var chart = c3.generate({
+				bindto: '#chart2',
+				data: {
+						x: 'x',
+						columns: [
+						time_values(),
+						//speed_values()
+						calorie_values()
+					]
+				}
+		});}
 				
 				
 				/*var chart = c3.generate({
