@@ -55,7 +55,7 @@
                 var act = "Undefined"
                 for (a in activites) {
                     if (activites[a]["ID"] == json['sessions'][ses]['activityType']) {
-                        act = activites[a]["ACTIVITY"];
+                        act = json['sessions'][ses]['name'];
                     }
                 }
 
