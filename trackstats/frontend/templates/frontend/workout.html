@@ -36,24 +36,10 @@
                 txt.innerHTML = s;
                 return JSON.parse(txt.value.replace(/u'/g, "'").replace(/'/g, '"'))
             }
-            function getParameterByName(name) {
-                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-                        results = regex.exec(location.search);
-                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-            }
-            var startTime1 = getParameterByName("start");
-            var endTime1 = getParameterByName("end");
-            var startTime2 = getParameterByName("start2");
-            var endTime2 = getParameterByName("end2");
-
-            console.log(startTime1);
-            console.log(endTime1);
             $.ajaxSetup({
                 async: false
             });
-            <!-- DATA = $.getJSON("/sample_data/workout.html")["responseText"]; -->
-			DATA = $.getJSON("/services/workout?startTime=" + startTime1 + "&endTime=" + endTime1 )["responseText"];
+            DATA = $.getJSON("/sample_data/workout.html")["responseText"];
             $.ajaxSetup({
                 async: true
             });
@@ -61,6 +47,9 @@
             var mapDetail = getJSON(DATA)[1][2];
             var speedDetail = getJSON(DATA)[1][0];
             var calories = getJSON(DATA)[1][1];
+			
+			console.log(calories[0].value[0]);
+			console.log(speedDetail[0].value[0]);
 
         </script>
 		<nav class="navbar horizontal-menu navbar-fixed-top navbar-minimal"><!-- set fixed position by adding class "navbar-fixed-top" -->
@@ -175,7 +164,9 @@
 			</br>
 			</br>
 			</br>		
-			<div id="map" style="width: 600px; height: 400px"></div>	
+			<div id="map" style="width: 600px; height: 400px"></div>
+
+			<div id = 'chart12'></div>
 			
 			
 			<footer class="main-footer sticky footer-type-1">
@@ -246,7 +237,105 @@
 			
 </script>
 
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css" rel="stylesheet" />
+	<script src="http://d3js.org/d3.v3.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
 
+
+<script>
+		
+		var startTime=[];
+		var endTime = [];
+		var totalTime = ['x']; 
+		var speed = ['speed'];
+		var calorie = ['calories'];
+		var tmp1 = [];
+		var tmp2 = [];
+	
+		function time_values()	{
+			
+			for (var i = 0;i<speedDetail.length;i++)// Traversing the whole json file to get the data
+				{
+				
+					startTime[i] = parseInt(speedDetail[i].startTimeNanos)/1000000;
+					
+					endTime[i] = parseInt(speedDetail[i].endTimeNanos)/1000000;
+					
+				 	var eg = new Date(startTime[0]);
+					
+					var eg1 = new Date(endTime[i]);
+					
+					var hr = eg.getHours();
+					var mnts  = eg.getMinutes();
+					var scnds  = eg.getSeconds();
+					
+					var hr1  = eg1.getHours();
+					var mnts1  = eg1.getMinutes();
+					var scnds1  = eg1.getSeconds();
+					
+					tmp1[i] = scnds+(mnts + (hr*60))*60;
+					tmp2[i] = scnds1+(mnts1+(hr1*60))*60;
+					
+					totalTime[i+1] = tmp2[i] - tmp1[i] ;
+				}	
+				
+			
+			return totalTime;
+		};
+			 
+			 
+		function speed_values(){
+			for (var i = 0;i<speedDetail.length;i++){
+			speed[i+1] = parseInt(speedDetail[i].value[0].fpVal);
+			}
+			
+		  return speed;
+		};	 
+		
+		function calorie_values(){
+			for (var i = 0;i<calories.length;i++){
+			
+			calorie[i+1] = parseInt(calories[i].value[0].fpVal);
+			}
+			
+		  return calorie;
+		};	 
+			 
+			console.log(time_values());
+			console.log(speed_values());
+			console.log(calorie_values());
+				
+				
+		var chart = c3.generate({
+			bindto: '#chart12',
+			data: {
+					x: 'x',
+					columns: [
+					time_values(),
+					speed_values(),
+					calorie_values()
+				]
+			}
+		});
+				
+				
+				/*var chart = c3.generate({
+				bindto: '#chart',
+				data: {
+						columns: [
+							distance
+							
+						]
+					}
+				});*/
+			
+			  
+					//document.write(tmp2,"\n",tmp1,"\n",totalTime);
+					//console.log(totalTime,distance);
+						
+					
+	
+	</script>
 	
 	
 	
@@ -254,6 +343,7 @@
 
 	<!-- JavaScripts initializations and stuff -->
 	<script src="/assets/js/xenon-custom.js"></script>
+		
 
 
 </html>
