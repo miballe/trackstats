@@ -1,8 +1,6 @@
 .textleft {
     margin-top: 50px;
 	color:black;
-    
-
 }
 
 .text {
@@ -143,33 +141,44 @@ ul li {
   float:left;
   width:199px;
   text-align:center;
-  border-left:px solid #DDDCD8;
   list-style:none;
-  
 }
 
 .top {
   background-color:white;
   height:75px;
-  h1 {
-    padding-top:20px;
-  }
 }
 
 .circle {
-  width:60px;
-  height:60px;
-  border-radius:60px;
-  font-size:20px;
+  width:80px;
+  height:80px;
+  border-radius:80px;
+  font-size:18px;
   color:#fff;
   line-height:60px;
   text-align:center;
   background:#989A8F;
   margin-left:70px;
   margin-top:10px;
+  padding-top:10px;
 }
 
+.summaryTitle {
+	background:#1d86c8;
+	text-align:center;
+	font-size:20px;
+	font-weight:bolder;
+    color:white;
+}
 
+.calendarTitle {
+	background:#1d86c8;
+	text-align:center;
+	font-size:20px;
+	font-weight:bolder;
+    color:white;
+    margin-top:60px;
+}
 
 .white {
  color:#FFFFFF; 
