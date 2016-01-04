@@ -151,14 +151,21 @@
 	</nav>
 	
 	<div class="page-container">
-		<h1>Work Out Detail</h1>	
-		<div class="main-content">
-				
-			<div id="map" style="width: 600px; height: 400px;margin-top:40;"></div>
-
-			<div id = 'chart1'></div>
 			
-			<div id = 'chart2'></div>
+		<div class="main-content">
+				<h1>Work Out Details</h1>
+			<div id="map" style="width: 600px; height: 400px;margin-top:40;margin-left:350px;"></div>
+			<br>
+			<br>
+
+				<h3>Speed vs Time</h3>
+			<div id ="chart1" style="width:600px;
+	height:300px; margin-left:350px;">
+				 
+			</div>
+			<h3>Calories vs Time</h3>
+			<div id ="chart2"style="width:600px;
+	height:300px; margin-left:350px;"></div>
 			
 			
 			<footer class="main-footer sticky footer-type-1">
@@ -333,8 +340,23 @@
 					columns: [
 					time_values(),
 					speed_values()
-					//calorie_values()
+					
 				]
+			},
+			axis:{
+				
+				y:{
+					
+					label:'Speed (m/s)'
+				
+				},
+				x:{
+				
+					label: 'Time (min)'
+				
+				}
+			
+			
 			}
 		});
 		}
@@ -346,27 +368,26 @@
 						x: 'x',
 						columns: [
 						time_values(),
-						//speed_values()
 						calorie_values()
 					]
+				},
+			axis:{
+				
+				y:{
+					
+					label:'Calories (kCal)'
+				
+				},
+				x:{
+				
+					label: 'Time (min)'
+				
 				}
+			}
 		});}
 				
 				
-				/*var chart = c3.generate({
-				bindto: '#chart',
-				data: {
-						columns: [
-							distance
-							
-						]
-					}
-				});*/
-			
-			  
-					//document.write(tmp2,"\n",tmp1,"\n",totalTime);
-					//console.log(totalTime,distance);
-						
+				
 					
 	
 	</script>
