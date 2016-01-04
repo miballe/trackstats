@@ -1,0 +1,64 @@
+        function pad(d) {
+            return (d < 10) ? '0' + d.toString() : d.toString();
+        }
+
+        function getJSON(s) {
+            var txt = document.createElement("textarea");
+            txt.innerHTML = s;
+            return JSON.parse(txt.value.replace(/u'/g, "'").replace(/'/g, '"'))
+        }
+
+        function createCalendarData(json) {
+
+            var d = new Date();
+            var event = {};
+            $.ajaxSetup({
+                async: false
+            });
+            var activites = $.getJSON("/sample_data/ActivityTypes.json")["responseJSON"];
+            $.ajaxSetup({
+                async: true
+            });
+            for (ses in json["sessions"]) {
+                var normalDate = new Date(parseInt(json['sessions'][ses]['startTimeMillis']));
+                var newFormat = normalDate.getFullYear().toString() + '-' + pad(normalDate.getMonth() + 1).toString() + '-' + pad(normalDate.getDate()).toString();
+                var act = "Undefined"
+                for (a in activites) {
+                    if (activites[a]["ID"] == json['sessions'][ses]['activityType']) {
+                        act = activites[a]["ACTIVITY"];
+                    }
+                }
+
+                event[newFormat] = {"number": act,"url": "/pages/workout?start="+json['sessions'][ses]['startTimeMillis']+"&"+"end="+json['sessions'][ses]['endTimeMillis']};
+            }
+            var caldata = Object();
+            caldata.time = d.getFullYear() + '-' + pad(d.getMonth() + 1);
+            caldata.events = event;
+
+            console.log(caldata);
+            return caldata;
+
+        }
+         $.ajaxSetup({
+            async: false
+        });
+
+         var dashboardDetail =  $.getJSON("/services/dashboard")["responseText"];
+
+        $.ajaxSetup({
+            async: true
+        });
+
+        var DATA = getJSON(dashboardDetail);
+
+        var DATACALENDAR = createCalendarData(DATA);
+
+								function signOut() {
+
+									window.location = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080/usr/login";
+								}
+
+				$(document).ready(function () {
+					$(".responsive-calendar").responsiveCalendar(DATACALENDAR);
+
+								});

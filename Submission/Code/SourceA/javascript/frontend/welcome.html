@@ -1,0 +1,25 @@
+
+        $(window).load(function () {
+            // Animate loader off screen
+            $(".se-pre-con").fadeOut("slow");
+            ;
+        });
+
+
+        function onSignIn(googleUser) {
+
+            function getParameterByName(name) {
+                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                        results = regex.exec(location.search);
+                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+
+            if (getParameterByName("redirect")){
+                document.cookie="REDIRECTION=" + getParameterByName("redirect");
+                window.location = 'http://localhost:8080/usr/login?redirect='+getParameterByName("redirect");
+            } else{
+                window.location = 'http://localhost:8080/usr/login';
+            }
+
+        }
