@@ -154,18 +154,20 @@
 			
 		<div class="main-content">
 				<h1>Work Out Details</h1>
-			<div id="map" style="width: 600px; height: 400px;margin-top:40;margin-left:350px;"></div>
+				
+				
+			<center><div class = "calendarTitle" style="width:600px;">Workout Route</div></center>
+			<center><div id="map" style="width: 600px; height: 400px;margin-top:40;"></div></center>
 			<br>
 			<br>
 
-				<h3>Speed vs Time</h3>
-			<div id ="chart1" style="width:600px;
-	height:300px; margin-left:350px;">
-				 
-			</div>
-			<h3>Calories vs Time</h3>
-			<div id ="chart2"style="width:600px;
-	height:300px; margin-left:350px;"></div>
+			<center><div class = "calendarTitle" style="width:600px;">Speed vs Time</div></center>
+			<center><div id ="chart1" style="width:600px;height:300px;"></div></center>
+			
+			<center><div class = "calendarTitle" style="width:600px;">Calories vs Time</div></center>
+			<center><div id ="chart2" style="width:600px;height:300px;"></div></center>
+			
+			
 			
 			
 			<footer class="main-footer sticky footer-type-1">
@@ -333,32 +335,32 @@
 		
 		
 		if(speed_values().length>1){	
-		var chart = c3.generate({
-			bindto: '#chart1',
-			data: {
-					x: 'x',
-					columns: [
-					time_values(),
-					speed_values()
-					
-				]
-			},
-			axis:{
-				
-				y:{
-					
-					label:'Speed (m/s)'
-				
+			var chart = c3.generate({
+				bindto: '#chart1',
+				data: {
+						x: 'x',
+						columns: [
+						time_values(),
+						speed_values()
+						
+					]
 				},
-				x:{
+				axis:{
+					
+					y:{
+						
+						label:'Speed (m/s)'
+					
+					},
+					x:{
+					
+						label: 'Time (min)'
+					
+					}
 				
-					label: 'Time (min)'
 				
 				}
-			
-			
-			}
-		});
+			});
 		}
 		
 		if(calorie_values().length>1){
@@ -386,10 +388,7 @@
 			}
 		});}
 				
-				
-				
-					
-	
+
 	</script>
 	
 	
