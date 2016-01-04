@@ -58,10 +58,11 @@ def dashboard(request):
 		distance = get_detailed_distance(oauthAccessToken, startTimeNanos, endTimeNanos, False)
 		sesLastMonth = get_sessions(oauthAccessToken,startTime,endTime, False)
 		nSessions = sesLastMonth
+
 		ses_all = get_sessions(oauthAccessToken,epochStartTime,endTime, True)
 		sessionData = ses_all[1]
 
-		dashboardSummary = {"calories": round(calories,2), "distance": round(distance,2), "nsessions": nSessions, "weight": weight, "sessions": sessionData}
+		dashboardSummary = {"calories": round(calories,0), "distance": round(distance/1000,2), "nsessions": nSessions, "weight": weight, "sessions": sessionData}
 
 		logging.info('[Services][Dashboard] Request End')
 
